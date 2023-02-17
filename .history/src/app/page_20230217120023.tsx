@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 
@@ -7,7 +6,6 @@ import DicoModal from '@/components/DicoModal'
 
 const inter = Inter({ subsets: ['latin'] })
 import parse from 'html-react-parser';
-import { useState } from 'react'
 
 type Trad = {
   source: string;

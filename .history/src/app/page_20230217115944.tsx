@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 
@@ -6,49 +5,8 @@ import EspModal from '@/components/EspModal'
 import DicoModal from '@/components/DicoModal'
 
 const inter = Inter({ subsets: ['latin'] })
-import parse from 'html-react-parser';
-import { useState } from 'react'
 
-type Trad = {
-  source: string;
-  target: string;
-};
-type Translations = Array<Trad>;
-interface TranslationsFetch {
-  translations: Array<Trad>;
-}
 export default function Home() {
-  const [word, setWord] = useState('');
-  const [translations, setTranslations] = useState<Translations>([]);
-
-  const submitWord = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    console.log('Submitting');
-    fetchDico(word).catch((err) => console.log(err));
-  };
-
-  const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-    return setWord(e.target.value);
-  };
-
-  const fetchDico = async (word: string): Promise<void> => {
-    console.log('Fetching..');
-    const url = 'https://memo2-ten.vercel.app/api/dico';
-    const options: RequestInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain;charset=UTF-8',
-      },
-      body: JSON.stringify(word),
-    };
-    const res = await fetch(url, options);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const data = await res.json();
-    console.log('Data: ', data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const { translations }: TranslationsFetch = data;
-    setTranslations(translations);
-  };
   return (
     <main className='h-screen w-screen'>
       <div className='grid  items-center text-center'>

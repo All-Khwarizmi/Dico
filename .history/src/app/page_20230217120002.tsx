@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 
@@ -6,17 +5,7 @@ import EspModal from '@/components/EspModal'
 import DicoModal from '@/components/DicoModal'
 
 const inter = Inter({ subsets: ['latin'] })
-import parse from 'html-react-parser';
-import { useState } from 'react'
 
-type Trad = {
-  source: string;
-  target: string;
-};
-type Translations = Array<Trad>;
-interface TranslationsFetch {
-  translations: Array<Trad>;
-}
 export default function Home() {
   const [word, setWord] = useState('');
   const [translations, setTranslations] = useState<Translations>([]);
