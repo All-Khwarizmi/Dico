@@ -108,7 +108,7 @@ export default function Home() {
         )}
       </div>
       <div className='flex h-[80%] flex-col  items-center gap-5'>
-        <div className=' h-[60%] max-h-[80%] w-[70%] rounded-lg overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+        <div className=' h-[60%] max-h-[80%] w-[70%] overflow-scroll rounded border-2 border-solid dark:border-gray-600 shadow-md shadow-gray-500 '>
           <div className='text-black '>
             <div className=''>
               <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
@@ -150,19 +150,21 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <form className='text-black ' onSubmit={(e) => submitWord(e)}>
+        <form
+          className='text-black  shadow-md '
+          onSubmit={(e) => submitWord(e)}
+        >
           <input
             onChange={(event) => inputWord(event)}
             value={word}
             placeholder='Que veux-tu chercher?'
-            className='rounded-lg border border-gray-400  dark:text-white border-1 dark:bg-gray-700 rounded-r-none px-3 py-1'
+            className='rounded-lg border dark:text-white border-1 dark:bg-gray-700 rounded-r-none px-3 py-1'
             type='text'
             name='word'
             id='word'
           />
           <button
-            className='rounded-lg border border-gray-400 border-1 rounded-l-none bg-gray-400 dark:text-white  text-md font-bold dark:bg-purple-900 px-3 py-1 dark:py-1'
+            className='rounded-lg rounded-l-none bg-gray-400 dark:text-white text-md font-bold dark:bg-purple-900 px-3 py-1 dark:py-1.5'
             type='submit'
           >
             Chercher

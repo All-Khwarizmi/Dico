@@ -108,22 +108,16 @@ export default function Home() {
         )}
       </div>
       <div className='flex h-[80%] flex-col  items-center gap-5'>
-        <div className=' h-[60%] max-h-[80%] w-[70%] rounded-lg overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+        <div className=' h-[60%] max-h-[80%] w-[60%] overflow-scroll rounded border-2 border-solid border-gray-600 shadow-md shadow-gray-500 bg-red-200'>
           <div className='text-black '>
             <div className=''>
               <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
-                <thead className='  sticky top-0 bg-gray-400 dark:bg-gray-900 text-xs uppercase text-gray-700 '>
+                <thead className='  sticky top-0 bg-gray-900 text-xs uppercase text-gray-700 '>
                   <tr>
-                    <th
-                      scope='col'
-                      className='px-6 font-bold text-black text-center dark:text-white py-3 '
-                    >
+                    <th scope='col' className='px-6 dark:text-white py-3 '>
                       Dans le sens de
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 font-bold text-black text-center dark:text-white py-3 '
-                    >
+                    <th scope='col' className='px-6 dark:text-white py-3 '>
                       Traduction
                     </th>
                   </tr>
@@ -132,13 +126,13 @@ export default function Home() {
                   {translations?.map((trad: Trad, index) => {
                     return (
                       <tr
-                        className='border-b bg-white  dark:border-gray-700 dark:bg-gray-800'
+                        className='border-b bg-white dark:border-gray-700 dark:bg-gray-800'
                         key={index}
                       >
                         <td className='px-6 py-4'> {parse(trad?.source)}</td>
                         <th
                           scope='row'
-                          className='whitespace-nowrap text-center px-6 py-4 font-medium text-gray-900 dark:text-white'
+                          className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'
                         >
                           {parse(trad?.target)}
                         </th>
@@ -150,19 +144,18 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <form className='text-black ' onSubmit={(e) => submitWord(e)}>
+        <form className='text-black' onSubmit={(e) => submitWord(e)}>
           <input
             onChange={(event) => inputWord(event)}
             value={word}
             placeholder='Que veux-tu chercher?'
-            className='rounded-lg border border-gray-400  dark:text-white border-1 dark:bg-gray-700 rounded-r-none px-3 py-1'
+            className='rounded-lg border dark:text-white border-1 bg-gray-700 rounded-r-none px-3 py-1'
             type='text'
             name='word'
             id='word'
           />
           <button
-            className='rounded-lg border border-gray-400 border-1 rounded-l-none bg-gray-400 dark:text-white  text-md font-bold dark:bg-purple-900 px-3 py-1 dark:py-1'
+            className='rounded-lg rounded-l-none bg-gray-400 dark:text-white font-bold dark:bg-purple-900 px-3 py-1 dark:py-1.5'
             type='submit'
           >
             Chercher

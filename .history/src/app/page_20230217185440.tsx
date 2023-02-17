@@ -108,7 +108,7 @@ export default function Home() {
         )}
       </div>
       <div className='flex h-[80%] flex-col  items-center gap-5'>
-        <div className=' h-[60%] max-h-[80%] w-[70%] rounded-lg overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+        <div className=' h-[60%] max-h-[80%] w-[70%] overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
           <div className='text-black '>
             <div className=''>
               <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
