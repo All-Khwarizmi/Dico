@@ -1,16 +1,14 @@
-'use client';
-import Image from 'next/image';
-import { Inter } from '@next/font/google';
-import { FaArrowLeft } from 'react-icons/fa';
-import { BsArrowRight } from 'react-icons/bs';
-import { FaArrowRight } from 'react-icons/fa';
-import EspModal from '@/components/EspModal';
-import DicoModal from '@/components/DicoModal';
+"use client"
+import Image from 'next/image'
+import { Inter } from '@next/font/google'
+import {FaExchangeAlt} from 'react-icons/fa'
+import EspModal from '@/components/EspModal'
+import DicoModal from '@/components/DicoModal'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] })
 import parse from 'html-react-parser';
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react'
+import Link from 'next/link'
 
 type Trad = {
   source: string;
@@ -21,19 +19,17 @@ interface TranslationsFetch {
   translations: Array<Trad>;
 }
 export default function Home() {
-  const [word, setWord] = useState<string>('');
-  const [isFr, setIsFR] = useState<Boolean>(false);
+  const [word, setWord] = useState('');
   const [translations, setTranslations] = useState<Translations>([]);
 
-  const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitWord = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    console.log('Submitting');
     let check = word.split(' ').length;
-    console.log('Submitting', check);
     if (check > 1) {
       return window.alert('1 mot à la fois');
     }
-    if (isFr) return fetchDico(word).catch((err) => console.log(err));
-     fetchDicoEsp(word).catch((err) => console.log(err));
+    fetchDico(word).catch((err) => console.log(err));
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +37,10 @@ export default function Home() {
   };
 
   const fetchDico = async (word: string): Promise<void> => {
+    
+    
     console.log('Fetching..');
-     const url = 'https://dico-ochre.vercel.app/api/dico';
+   /*  const url = 'https://dico-ochre.vercel.app/api/dico';
     const options: RequestInit = {
       method: 'POST',
       headers: {
@@ -56,58 +54,26 @@ export default function Home() {
     console.log('Data: ', data);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { translations }: TranslationsFetch = data;
-    setTranslations(translations);
-    setWord('');
-  };
-  const fetchDicoEsp = async (word: string): Promise<void> => {
-    console.log('Fetching..');
-    const url = 'https://dico-ochre.vercel.app/api/esp';
-    const options: RequestInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain;charset=UTF-8',
-      },
-      body: JSON.stringify(word),
-    };
-    const res = await fetch(url, options);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const data = await res.json();
-    console.log('Data: ', data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const { translations }: TranslationsFetch = data;
-    setTranslations(translations);
-    setWord('');
+    setTranslations(translations); */
+    setWord("")
   };
   return (
     <main className='h-screen w-screen'>
-      <div className='grid place-items-center pt-5 '>
-        {isFr ? (
-          <div className='grid w-[60%] grid-cols-3  place-items-center  '>
-            <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
-            </button>
-            <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowRight />
-            </button>
-            <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
-            </button>
-          </div>
-        ) : (
-          <div className='grid w-[60%] grid-cols-3  place-items-center  '>
-            <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
-            </button>
-            <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowLeft />
-            </button>
-            <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
-            </button>
-          </div>
-        )}
+      <div className='grid place-items-center'>
+        <div className='grid w-[60%] grid-cols-3  place-items-center  '>
+          <Link href={'/'}>
+            <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
+          </Link>
+          <Link href={'/'}>
+            <FaExchangeAlt />
+          </Link>
+          <Link href={'/'}>
+
+          <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
+          </Link>
+        </div>
       </div>
-      <div className='flex h-[100%] flex-col items-center gap-5'>
+      <div className='flex h-[80%] flex-col items-center gap-5'>
         <div className='border-black-500 h-[40%] max-h-[40%] w-[60%] overflow-scroll rounded border-2 border-solid bg-gray-400'>
           <div className='text-black '>
             <div className=''>
@@ -149,7 +115,7 @@ export default function Home() {
             onChange={(event) => inputWord(event)}
             value={word}
             placeholder='Que veux-tu chercher?'
-            className='rounded-lg border dark:text-white border-1 bg-gray-700 rounded-r-none px-3 py-1'
+            className='rounded-lg border border-1 bg-gray-700 rounded-r-none px-3 py-1'
             type='text'
             name='word'
             id='word'

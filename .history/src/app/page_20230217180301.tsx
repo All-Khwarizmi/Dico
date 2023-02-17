@@ -80,7 +80,7 @@ export default function Home() {
   };
   return (
     <main className='h-screen w-screen'>
-      <div className='grid place-items-center pt-5 '>
+      <div className='grid place-items-center'>
         {isFr ? (
           <div className='grid w-[60%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
@@ -99,7 +99,7 @@ export default function Home() {
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowLeft />
+              <FaExchangeAlt />
             </button>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
@@ -107,7 +107,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className='flex h-[100%] flex-col items-center gap-5'>
+      <div className='flex h-[80%] flex-col items-center gap-5'>
         <div className='border-black-500 h-[40%] max-h-[40%] w-[60%] overflow-scroll rounded border-2 border-solid bg-gray-400'>
           <div className='text-black '>
             <div className=''>

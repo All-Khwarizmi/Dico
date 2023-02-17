@@ -1,9 +1,8 @@
 'use client';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaExchangeAlt } from 'react-icons/fa';
 import { BsArrowRight } from 'react-icons/bs';
-import { FaArrowRight } from 'react-icons/fa';
 import EspModal from '@/components/EspModal';
 import DicoModal from '@/components/DicoModal';
 
@@ -80,34 +79,34 @@ export default function Home() {
   };
   return (
     <main className='h-screen w-screen'>
-      <div className='grid place-items-center pt-5 '>
+      <div className='grid place-items-center'>
         {isFr ? (
           <div className='grid w-[60%] grid-cols-3  place-items-center  '>
-            <button onClick={() => setIsFR(!isFr)}>
+            <button onClick={() => setIsFR(!isFr)} >
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
-            <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowRight />
+            <button onClick={() => setIsFR(!isFr)} >
+              <FaExchangeAlt />
             </button>
-            <button onClick={() => setIsFR(!isFr)}>
+            <button onClick={() => setIsFR(!isFr)} >
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
             </button>
           </div>
         ) : (
           <div className='grid w-[60%] grid-cols-3  place-items-center  '>
-            <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
-            </button>
-            <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowLeft />
-            </button>
-            <button onClick={() => setIsFR(!isFr)}>
+            <button onClick={() => setIsFR(!isFr)} >
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
+            </button>
+            <button onClick={() => setIsFR(!isFr)} >
+              <FaExchangeAlt />
+            </button>
+            <button onClick={() => setIsFR(!isFr)} >
+              <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
           </div>
         )}
       </div>
-      <div className='flex h-[100%] flex-col items-center gap-5'>
+      <div className='flex h-[80%] flex-col items-center gap-5'>
         <div className='border-black-500 h-[40%] max-h-[40%] w-[60%] overflow-scroll rounded border-2 border-solid bg-gray-400'>
           <div className='text-black '>
             <div className=''>

@@ -80,7 +80,7 @@ export default function Home() {
   };
   return (
     <main className='h-screen w-screen'>
-      <div className='grid place-items-center pt-5 '>
+      <div className='grid place-items-center pt-10 '>
         {isFr ? (
           <div className='grid w-[60%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
