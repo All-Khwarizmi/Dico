@@ -62,9 +62,9 @@ export default function Home() {
             <FaExchangeAlt />
           </Link>
           <Link href={'/'}>
-
-          <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
+            
           </Link>
+          <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
         </div>
       </div>
       <div className='flex h-[80%] flex-col items-center gap-5'>

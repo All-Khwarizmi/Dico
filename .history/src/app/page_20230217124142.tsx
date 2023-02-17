@@ -1,14 +1,13 @@
 "use client"
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import {FaExchangeAlt} from 'react-icons/fa'
+
 import EspModal from '@/components/EspModal'
 import DicoModal from '@/components/DicoModal'
 
 const inter = Inter({ subsets: ['latin'] })
 import parse from 'html-react-parser';
 import { useState } from 'react'
-import Link from 'next/link'
 
 type Trad = {
   source: string;
@@ -53,19 +52,8 @@ export default function Home() {
   };
   return (
     <main className='h-screen w-screen'>
-      <div className='grid place-items-center'>
-        <div className='grid w-[60%] grid-cols-3  place-items-center  '>
-          <Link href={'/'}>
-            <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
-          </Link>
-          <Link href={'/'}>
-            <FaExchangeAlt />
-          </Link>
-          <Link href={'/'}>
-
-          <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
-          </Link>
-        </div>
+      <div className='grid  items-center text-center'>
+        <h1 className='py-5 text-center text-2xl'>Dico</h1>
       </div>
       <div className='flex h-[80%] flex-col items-center gap-5'>
         <div className='border-black-500 h-[40%] max-h-[40%] w-[60%] overflow-scroll rounded border-2 border-solid bg-gray-400'>
@@ -74,10 +62,16 @@ export default function Home() {
               <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
                 <thead className='  sticky top-0 bg-gray-900 text-xs uppercase text-gray-700 '>
                   <tr>
-                    <th scope='col' className='px-6 dark:text-white py-3 '>
+                    <th
+                      scope='col'
+                      className='px-6 dark:text-white py-3 '
+                    >
                       Dans le sens de
                     </th>
-                    <th scope='col' className='px-6 dark:text-white py-3 '>
+                    <th
+                      scope='col'
+                      className='px-6 dark:text-white py-3 '
+                    >
                       Traduction
                     </th>
                   </tr>
@@ -109,13 +103,13 @@ export default function Home() {
             onChange={(event) => inputWord(event)}
             value={word}
             placeholder='Que veux-tu chercher?'
-            className='rounded-lg border border-1 bg-gray-700 rounded-r-none px-3 py-1'
+            className='rounded-lg border border-2 bg-gray-700 rounded-r-none px-3 py-1'
             type='text'
             name='word'
             id='word'
           />
           <button
-            className='rounded-lg rounded-l-none bg-gray-400 dark:text-white font-bold dark:bg-purple-900 px-3 py-1 dark:py-1.5'
+            className='rounded-lg rounded-l-none bg-gray-400 dark:text-white font-bold dark:bg-purple-800 px-3 py-1 dark:py-1.5'
             type='submit'
           >
             Chercher
