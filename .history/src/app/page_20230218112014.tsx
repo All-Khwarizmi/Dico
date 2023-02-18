@@ -121,11 +121,7 @@ export default function Home() {
     }
   };
   return (
-    <main
-      className={` h-screen w-screen ${
-        isTranslations ? ' ' : 'grid content-center '
-      }`}
-    >
+    <main className={` h-screen w-screen ${isTranslations ? " ": "grid content-center "}`}>
       <div className='grid place-items-center pt-5 '>
         {isFr ? (
           <div
@@ -137,7 +133,7 @@ export default function Home() {
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowRight className='text-purple-700 text-2xl' />
+              <FaArrowRight color='red' className='text-red-500' />
             </button>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
@@ -153,7 +149,7 @@ export default function Home() {
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowLeft className='text-purple-700 text-2xl' />
+              <FaArrowLeft />
             </button>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>

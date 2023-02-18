@@ -137,7 +137,7 @@ export default function Home() {
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowRight className='text-purple-700 text-2xl' />
+              <FaArrowRight className='text-purple-700 text-1xl' />
             </button>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
@@ -150,10 +150,10 @@ export default function Home() {
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
+              <h1 className='py-5 text-center uppercase text-2xl'>Français</h1>
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowLeft className='text-purple-700 text-2xl' />
+              <FaArrowLeft className='text-purple-700 text-1xl' />
             </button>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
