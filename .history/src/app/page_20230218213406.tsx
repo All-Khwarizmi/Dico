@@ -128,7 +128,7 @@ export default function Home() {
   return (
     <main
       className={` h-screen w-screen  ${
-        isTranslations ? 'grid content-start ' : 'grid content-center '
+        isTranslations ? 'grid content-start ' : ' '
       }`}
     >
       <div className='h-full'>
