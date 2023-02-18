@@ -122,14 +122,14 @@ export default function Home() {
   };
   return (
     <main
-      className={` h-screen w-screen overflow-scroll ${
+      className={` h-screen w-screen ${
         isTranslations ? ' ' : 'grid content-center '
       }`}
     >
       <div className='grid place-items-center  w-full h-fit '>
         {isFr ? (
           <div
-            className={`grid gap-2 grid-cols-3 ${
+            className={`grid  grid-cols-3 ${
               isTranslations
                 ? 'w-[80%] md:w-[40%]'
                 : 'w-[60%] md:w-[40%] lg:w-[20%]  sm:w-[30%] '
@@ -147,20 +147,20 @@ export default function Home() {
           </div>
         ) : (
           <div
-            className={`grid gap-2  grid-cols-3 ${
+            className={`grid  grid-cols-3 ${
               isTranslations
                 ? 'w-[80%] md:w-[40%]'
                 : 'w-[60%] md:w-[40%] lg:w-[20%]  sm:w-[30%] '
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
+              <h1 className='pb-5 text-center uppercase text-1xl'>Français</h1>
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <FaArrowLeft className='text-purple-700 text-2xl' />
+              <FaArrowLeft className='text-purple-700  text-2xl' />
             </button>
             <button onClick={() => setIsFR(!isFr)}>
-              <h1 className='py-5 text-center uppercase text-1xl'>Espagnol</h1>
+              <h1 className='pb-5 text-center uppercase text-1xl'>Espagnol</h1>
             </button>
           </div>
         )}
@@ -174,7 +174,7 @@ export default function Home() {
           ) : null
         ) : null}
         {isTranslations && (
-          <div className=' h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+          <div className=' h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg overflow-x-hidden overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>
               <div className=''>
                 <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>

@@ -122,7 +122,7 @@ export default function Home() {
   };
   return (
     <main
-      className={` h-screen w-screen overflow-scroll ${
+      className={` h-screen w-screen ${
         isTranslations ? ' ' : 'grid content-center '
       }`}
     >
@@ -174,7 +174,7 @@ export default function Home() {
           ) : null
         ) : null}
         {isTranslations && (
-          <div className=' h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+          <div className=' h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg overflow-x-hidden overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>
               <div className=''>
                 <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
