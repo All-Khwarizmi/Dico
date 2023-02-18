@@ -23,13 +23,12 @@ interface TranslationsFetch {
 export default function Home() {
   const [word, setWord] = useState<string>('');
   const [isFr, setIsFR] = useState<Boolean>(false);
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [isFr, setIsFR] = useState<Boolean>(false);
   const [isTranslations, setIsTranslations] = useState<Boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
 
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true)
     let check = word.split(' ').length;
     console.log('Submitting', check);
     if (check > 1) {
@@ -87,11 +86,7 @@ export default function Home() {
     <main className='h-screen w-screen'>
       <div className='grid place-items-center pt-5 '>
         {isFr ? (
-          <div
-            className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
-            }  place-items-center  `}
-          >
+          <div className='grid w-[40%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
@@ -103,11 +98,7 @@ export default function Home() {
             </button>
           </div>
         ) : (
-          <div
-            className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
-            }  place-items-center  `}
-          >
+          <div className='grid w-[40%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
@@ -121,13 +112,6 @@ export default function Home() {
         )}
       </div>
       <div className='flex h-[80%] flex-col  items-center gap-5'>
-        {isLoading ? (
-          !isTranslations ? (
-            <p className='dark:text-white text-black text-2xl font-bold'>
-              Loading...
-            </p>
-          ) : null
-        ) : null}
         {isTranslations && (
           <div className=' h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>

@@ -48,7 +48,7 @@ export default async function handler(
   await runMiddleware(req, res, cors);
   if (req.method === 'GET')
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
-  /*  Fetch only one word and no all of them  */
+  /*  F  */
   const db = await prisma.word.findMany();
 
   const wordFromDb = db.filter((word) => word.source === JSON.parse(req.body));

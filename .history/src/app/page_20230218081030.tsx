@@ -89,7 +89,7 @@ export default function Home() {
         {isFr ? (
           <div
             className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
+              isTranslations ? 'w-[40%]' : 'w-[20%]'
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
@@ -105,7 +105,7 @@ export default function Home() {
         ) : (
           <div
             className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
+              isTranslations ? 'w-[40%]' : 'w-[20%]'
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>

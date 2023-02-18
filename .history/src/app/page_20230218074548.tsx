@@ -23,20 +23,18 @@ interface TranslationsFetch {
 export default function Home() {
   const [word, setWord] = useState<string>('');
   const [isFr, setIsFR] = useState<Boolean>(false);
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [isTranslations, setIsTranslations] = useState<Boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
 
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true)
     let check = word.split(' ').length;
     console.log('Submitting', check);
     if (check > 1) {
       return window.alert('1 mot à la fois');
     }
-    if (isFr) return fetchDico(word.toLocaleLowerCase()).catch((err) => console.log(err));
-    fetchDicoEsp(word.toLocaleLowerCase()).catch((err) => console.log(err));
+    if (isFr) return fetchDico(word).catch((err) => console.log(err));
+    fetchDicoEsp(word).catch((err) => console.log(err));
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +58,6 @@ export default function Home() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { translations }: TranslationsFetch = data;
     setTranslations(translations);
-    setIsTranslations(true);
     setWord('');
   };
   const fetchDicoEsp = async (word: string): Promise<void> => {
@@ -80,18 +77,13 @@ export default function Home() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { translations }: TranslationsFetch = data;
     setTranslations(translations);
-    setIsTranslations(true);
     setWord('');
   };
   return (
     <main className='h-screen w-screen'>
       <div className='grid place-items-center pt-5 '>
         {isFr ? (
-          <div
-            className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
-            }  place-items-center  `}
-          >
+          <div className='grid w-[40%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
@@ -103,11 +95,7 @@ export default function Home() {
             </button>
           </div>
         ) : (
-          <div
-            className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
-            }  place-items-center  `}
-          >
+          <div className='grid w-[40%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
@@ -121,57 +109,7 @@ export default function Home() {
         )}
       </div>
       <div className='flex h-[80%] flex-col  items-center gap-5'>
-        {isLoading ? (
-          !isTranslations ? (
-            <p className='dark:text-white text-black text-2xl font-bold'>
-              Loading...
-            </p>
-          ) : null
-        ) : null}
-        {isTranslations && (
-          <div className=' h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
-            <div className='text-black '>
-              <div className=''>
-                <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
-                  <thead className='  sticky top-0 bg-gray-400 dark:bg-gray-900 text-xs uppercase text-gray-700 '>
-                    <tr>
-                      <th
-                        scope='col'
-                        className='px-6 font-bold text-black text-center dark:text-white py-3 '
-                      >
-                        Dans le sens de
-                      </th>
-                      <th
-                        scope='col'
-                        className='px-6 font-bold text-black text-center dark:text-white py-3 '
-                      >
-                        Traduction
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className='bg-gray-800'>
-                    {translations?.map((trad: Trad, index) => {
-                      return (
-                        <tr
-                          className='border-b text-center bg-white  dark:border-gray-700 dark:bg-gray-800'
-                          key={index}
-                        >
-                          <td className='px-6 py-4'> {parse(trad?.source)}</td>
-                          <th
-                            scope='row'
-                            className='whitespace-nowrap text-center px-6 py-4 font-medium text-gray-900 dark:text-white'
-                          >
-                            {parse(trad?.target)}
-                          </th>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
+       
 
         <form className='text-black  ' onSubmit={(e) => submitWord(e)}>
           <input

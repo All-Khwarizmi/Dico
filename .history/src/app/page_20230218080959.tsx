@@ -89,7 +89,7 @@ export default function Home() {
         {isFr ? (
           <div
             className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
+              isTranslations? :'w-[20%]'
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
@@ -103,11 +103,7 @@ export default function Home() {
             </button>
           </div>
         ) : (
-          <div
-            className={`grid  grid-cols-3 ${
-              isTranslations ? 'w-[40%]' : 'md:w-[20%]'
-            }  place-items-center  `}
-          >
+          <div className='grid w-[40%] grid-cols-3  place-items-center  '>
             <button onClick={() => setIsFR(!isFr)}>
               <h1 className='py-5 text-center uppercase text-1xl'>Français</h1>
             </button>
