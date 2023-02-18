@@ -100,9 +100,6 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-body {
-  height: 100vh;
-}
 
 a {
   color: inherit;
