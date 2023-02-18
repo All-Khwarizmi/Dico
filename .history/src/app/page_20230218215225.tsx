@@ -127,7 +127,7 @@ export default function Home() {
   };
   return (
     <main
-      className={`h-full   ${
+      className={`h-fit overflow-y-hidden  ${
         isTranslations ? 'grid content-start ' : 'grid content-center '
       }`}
     >
