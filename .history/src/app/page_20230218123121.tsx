@@ -127,12 +127,12 @@ export default function Home() {
   };
   return (
     <main
-      className={` h-screen w-screen  ${
+      className={`  ${
         isTranslations ? 'grid content-start ' : 'flex flex-col justify-center '
       }`}
     >
       <div>
-        <div className='grid place-items-center  w-full  '>
+        <div className='grid place-items-center  w-full h-fit '>
           {isFr ? (
             <div
               className={`grid gap-2 grid-cols-3 ${

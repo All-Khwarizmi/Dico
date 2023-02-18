@@ -119,7 +119,6 @@ export default function Home() {
       }
 
       setIsTranslations(true);
-      window.scrollTo(0, 0);
       setWord('');
     } catch (err) {
       console.log(err);
@@ -132,7 +131,7 @@ export default function Home() {
       }`}
     >
       <div>
-        <div className='grid place-items-center  w-full  '>
+        <div className='grid place-items-center  w-full h-fit '>
           {isFr ? (
             <div
               className={`grid gap-2 grid-cols-3 ${
