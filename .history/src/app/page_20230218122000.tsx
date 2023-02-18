@@ -77,7 +77,6 @@ export default function Home() {
         });
         console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
-        document.body.scrollTop = 0;
       } else {
         setTranslations(translations);
       }
