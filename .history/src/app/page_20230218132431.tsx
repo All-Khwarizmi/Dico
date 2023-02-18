@@ -138,7 +138,7 @@ export default function Home() {
               className={`grid gap-2 grid-cols-3 ${
                 isTranslations
                   ? 'w-[80%] md:w-[40%]'
-                  : 'w-[60%] md:w-[30%] lg:w-[15%]  sm:w-[30%] '
+                  : 'w-[60%] md:w-[30%] lg:w-[20%]  sm:w-[30%] '
               }  place-items-center  `}
             >
               <button onClick={() => setIsFR(!isFr)}>
@@ -160,7 +160,7 @@ export default function Home() {
               className={`grid gap-2 grid-cols-3 ${
                 isTranslations
                   ? 'w-[80%] md:w-[40%]'
-                  : 'w-[60%] md:w-[30%] lg:w-[15%]  sm:w-[30%] '
+                  : 'w-[60%] md:w-[20%] lg:w-[20%]  sm:w-[30%] '
               }  place-items-center  `}
             >
               <button onClick={() => setIsFR(!isFr)}>

@@ -89,7 +89,6 @@ body {
   overflow-x: hidden;
 }
 
-html, 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
