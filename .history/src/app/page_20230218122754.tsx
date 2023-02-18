@@ -78,7 +78,7 @@ export default function Home() {
         console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
         window.scrollTo(0, 0)
-      
+        document.body.scrollTop = 0;
       } else {
         setTranslations(translations);
       }
