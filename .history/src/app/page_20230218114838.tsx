@@ -126,7 +126,7 @@ export default function Home() {
         isTranslations ? ' ' : 'grid content-center '
       }`}
     >
-      <div className='grid place-items-center pt-5 w-full h-fit '>
+      <div className='grid place-items-center pt-5 w-full h-full '>
         {isFr ? (
           <div
             className={`grid  grid-cols-3 ${
