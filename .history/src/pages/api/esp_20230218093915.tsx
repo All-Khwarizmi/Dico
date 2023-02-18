@@ -50,6 +50,9 @@ export default async function handler(
     },
   });
 
+  // res.json({message: 'No data in DB'});
+  /* const wordFromDb = db?.filter((word) => word.source === JSON.parse(req.body)); */
+
   try {
     if (db) {
       res.json({ source: req.body, translations: db.word, db: true });

@@ -26,9 +26,9 @@ const url = 'http://localhost:3000/api/prisma';
     const data = await res.json();
     console.log('Data: ', data);
     // Data could be coming from db or api so type it accordingly
-/* const {source, translations} = data
+/* const {source, translations} = data */
 
- console.log('Data: ', source, JSON.parse(translations)); */
+ console.log('Data: ', source, JSON.parse(translations));
 
 
    

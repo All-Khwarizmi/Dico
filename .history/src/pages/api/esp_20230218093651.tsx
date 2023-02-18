@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'cors';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
 
 // Set environement variables
+
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -41,56 +40,31 @@ export default async function handler(
   if (req.method === 'GET')
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
   // Rest of the API logic
-
-  /*  Fetch only one word and no all of them  */
-
-  const db = await prisma.word.findFirst({
-    where: {
-      source: JSON.parse(req.body),
+  const options: RequestInit = {
+    method: 'GET',
+    headers: {
+      'X-secret': process.env.NEXT_PUBLIC_SECRET!,
     },
-  });
-
+  };
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=es&language=fr&l=esfr`;
+  console.log('Got a french  request', req.body, req.method);
   try {
-    if (db) {
-      res.json({ source: req.body, translations: db.word, db: true });
-    } else {
-      const options: RequestInit = {
-        method: 'GET',
-        headers: {
-          'X-secret': process.env.NEXT_PUBLIC_SECRET!,
-        },
-      };
+    const response = await fetch(url, options);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data = await response.json();
 
-      const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=es&language=fr&l=esfr`;
-      console.log('Got a spanish - french  request', req.body, req.method);
-      const response = await fetch(url, options);
+    // Parsing  data
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-member-access
+    const translations: unknown = data[0].hits[0].roms[0].arabs[0].translations;
+    // eslint-disable-next-line  @typescript-eslint/no-unsafe-member-access
+    const source: unknown = data[0].hits[0].roms[0].headword;
 
-      const data = await response.json();
-
-      // Parsing  data
-      type Trad = {
-        source: string;
-        target: string;
-      };
-      const translations: Array<Trad> =
-        data[0].hits[0].roms[0].arabs[0].translations;
-      const source: string = data[0].hits[0].roms[0].headword;
-
-      const translationsString = translations.map((trad) => {
-        return JSON.stringify(trad);
-      });
-
-      const pushDb = await prisma.word.create({
-        data: {
-          word: translationsString,
-          source: source,
-        },
-      });
-      res.json({ source, translations, db: false });
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    res.json({ source, translations });
   } catch (error) {
     console.log(error);
-
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     res.json({ message: 'Something went wrong' });
   }
 }

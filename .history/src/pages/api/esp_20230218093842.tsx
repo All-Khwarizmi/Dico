@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'cors';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
 
 // Set environement variables
+
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -41,7 +40,8 @@ export default async function handler(
   if (req.method === 'GET')
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
   // Rest of the API logic
-
+  const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=es&language=fr&l=esfr`;
+  console.log('Got a spanish - french  request', req.body, req.method);
   /*  Fetch only one word and no all of them  */
 
   const db = await prisma.word.findFirst({
@@ -49,6 +49,9 @@ export default async function handler(
       source: JSON.parse(req.body),
     },
   });
+
+  // res.json({message: 'No data in DB'});
+  /* const wordFromDb = db?.filter((word) => word.source === JSON.parse(req.body)); */
 
   try {
     if (db) {
@@ -61,8 +64,7 @@ export default async function handler(
         },
       };
 
-      const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=es&language=fr&l=esfr`;
-      console.log('Got a spanish - french  request', req.body, req.method);
+      const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=fr&language=es&l=esfr`;
       const response = await fetch(url, options);
 
       const data = await response.json();

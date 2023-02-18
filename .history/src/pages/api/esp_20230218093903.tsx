@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'cors';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
 
 // Set environement variables
 
@@ -49,6 +47,9 @@ export default async function handler(
       source: JSON.parse(req.body),
     },
   });
+
+  // res.json({message: 'No data in DB'});
+  /* const wordFromDb = db?.filter((word) => word.source === JSON.parse(req.body)); */
 
   try {
     if (db) {

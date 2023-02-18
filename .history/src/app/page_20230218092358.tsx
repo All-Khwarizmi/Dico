@@ -16,10 +16,12 @@ type Trad = {
   source: string;
   target: string;
 };
-type TradParsed = string;
+type TradParsed = {
+  
+}
 type Translations = Array<Trad>;
 interface TranslationsFetch {
-  translations: Array<Trad> | Array<TradParsed>;
+  translations: Array<Trad> | Array<string>;
   source: string;
   db: boolean;
 }
@@ -61,30 +63,27 @@ export default function Home() {
       body: JSON.stringify(word),
     };
     const res = await fetch(url, options);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = await res.json();
     console.log('Data: ', data);
-
-    const { translations, source, db } = data;
-    try {
-      if (db) {
-        const parsedTrads = translations.map((trad: string) => {
-          return JSON.parse(trad);
-        });
-        console.log('Parsed Data: ', parsedTrads);
-        setTranslations(parsedTrads);
-      } else {
-        setTranslations(translations);
-      }
-
-      setIsTranslations(true);
-      setWord('');
-    } catch (err) {
-      console.log(err);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const { translations, source, db }: TranslationsFetch = data;
+    if (db) {
+      const parsedTrads = translations.map((trad) => {
+        return JSON.parse(trad);
+      });
+      console.log('Parsed Data: ', parsedTrads);
+      setTranslations(parsedTrads);
+    } else {
+       setTranslations(translations);
     }
+
+    setIsTranslations(true);
+    setWord('');
   };
   const fetchDicoEsp = async (word: string): Promise<void> => {
     console.log('Fetching..');
-    const url = 'http://localhost:3000/api/esp';
+    const url = 'https://dico-ochre.vercel.app/api/esp';
     const options: RequestInit = {
       method: 'POST',
       headers: {
@@ -93,27 +92,14 @@ export default function Home() {
       body: JSON.stringify(word),
     };
     const res = await fetch(url, options);
-
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = await res.json();
     console.log('Data: ', data);
-
-    const { translations, source, db } = data;
-    try {
-      if (db) {
-        const parsedTrads = translations.map((trad: string) => {
-          return JSON.parse(trad);
-        });
-        console.log('Parsed Data: ', parsedTrads);
-        setTranslations(parsedTrads);
-      } else {
-        setTranslations(translations);
-      }
-
-      setIsTranslations(true);
-      setWord('');
-    } catch (err) {
-      console.log(err);
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const { translations }: TranslationsFetch = data;
+    setTranslations(translations);
+    setIsTranslations(true);
+    setWord('');
   };
   return (
     <main className='h-screen w-screen'>
