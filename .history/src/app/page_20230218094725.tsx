@@ -36,12 +36,11 @@ export default function Home() {
     let check = word.split(' ').length;
     console.log('Checking', check);
     if (check > 1) {
-      window.alert('1 mot à la fois');
-     return  setWord("")
+      return window.alert('1 mot à la fois');
     }   
     
     setIsLoading(true);
-
+    
     if (isFr)
       return fetchDico(word.toLocaleLowerCase()).catch((err) =>
         console.log(err)
@@ -68,7 +67,7 @@ export default function Home() {
     const data = await res.json();
     console.log('Data: ', data);
 
-    const { translations, db } = data;
+    const { translations, source, db } = data;
     try {
       if (db) {
         const parsedTrads = translations.map((trad: string) => {
@@ -101,7 +100,7 @@ export default function Home() {
     const data = await res.json();
     console.log('Data: ', data);
 
-    const { translations, db } = data;
+    const { translations, source, db } = data;
     try {
       if (db) {
         const parsedTrads = translations.map((trad: string) => {

@@ -68,7 +68,7 @@ export default function Home() {
     const data = await res.json();
     console.log('Data: ', data);
 
-    const { translations, db } = data;
+    const { translations, source, db } = data;
     try {
       if (db) {
         const parsedTrads = translations.map((trad: string) => {
@@ -101,7 +101,7 @@ export default function Home() {
     const data = await res.json();
     console.log('Data: ', data);
 
-    const { translations, db } = data;
+    const { translations, source, db } = data;
     try {
       if (db) {
         const parsedTrads = translations.map((trad: string) => {

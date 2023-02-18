@@ -37,7 +37,6 @@ export default function Home() {
     console.log('Checking', check);
     if (check > 1) {
       window.alert('1 mot à la fois');
-     return  setWord("")
     }   
     
     setIsLoading(true);
@@ -68,7 +67,7 @@ export default function Home() {
     const data = await res.json();
     console.log('Data: ', data);
 
-    const { translations, db } = data;
+    const { translations, source, db } = data;
     try {
       if (db) {
         const parsedTrads = translations.map((trad: string) => {
@@ -101,7 +100,7 @@ export default function Home() {
     const data = await res.json();
     console.log('Data: ', data);
 
-    const { translations, db } = data;
+    const { translations, source, db } = data;
     try {
       if (db) {
         const parsedTrads = translations.map((trad: string) => {
