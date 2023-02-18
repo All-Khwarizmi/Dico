@@ -179,7 +179,7 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className='flex flex-col  items-center gap-5'>
+        <div className='flex  flex-col  items-center gap-5'>
           {isLoading ? (
             !isTranslations ? (
               <p className='dark:text-white text-black text-2xl font-bold'>

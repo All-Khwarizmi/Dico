@@ -101,7 +101,13 @@ body {
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  
+}
+
+html {
+  
 }
 
 a {

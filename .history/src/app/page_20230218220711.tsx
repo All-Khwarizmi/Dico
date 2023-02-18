@@ -127,12 +127,12 @@ export default function Home() {
   };
   return (
     <main
-      className={`h-full overflow-y-hidden  ${
+      className={` h-full  ${
         isTranslations ? 'grid content-start ' : 'grid content-center '
       }`}
     >
-     
-        <div className='grid place-items-center  w-full  '>
+      <div className=''>
+        <div className='grid place-items-center   w-full  '>
           {isFr ? (
             <div
               className={`grid gap-2 grid-cols-3 ${
@@ -179,7 +179,7 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className='flex flex-col  items-center gap-5'>
+        <div className='flex relative flex-col  items-center gap-5'>
           {isLoading ? (
             !isTranslations ? (
               <p className='dark:text-white text-black text-2xl font-bold'>
@@ -188,7 +188,7 @@ export default function Home() {
             ) : null
           ) : null}
           {isTranslations && (
-            <div className=' min-h-[30%] max-h-[60%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+            <div className=' min-h-[60%] max-h-[80%] lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
               <div className='text-black '>
                 <div className=''>
                   <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
@@ -253,7 +253,7 @@ export default function Home() {
             </button>
           </form>
         </div>
- 
+      </div>
     </main>
   );
 }

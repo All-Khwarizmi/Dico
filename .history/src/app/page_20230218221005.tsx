@@ -132,7 +132,7 @@ export default function Home() {
       }`}
     >
      
-        <div className='grid place-items-center  w-full  '>
+        <div className='grid place-items-center h-fit  w-full  '>
           {isFr ? (
             <div
               className={`grid gap-2 grid-cols-3 ${
@@ -179,7 +179,7 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className='flex flex-col  items-center gap-5'>
+        <div className='flex relative flex-col  items-center gap-5'>
           {isLoading ? (
             !isTranslations ? (
               <p className='dark:text-white text-black text-2xl font-bold'>
