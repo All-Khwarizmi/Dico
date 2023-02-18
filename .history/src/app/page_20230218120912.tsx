@@ -123,7 +123,7 @@ export default function Home() {
   return (
     <main
       className={` h-screen w-screen overflow-scroll ${
-        isTranslations ? 'grid content-start ' : 'grid content-center '
+        isTranslations ? ' ' : 'grid content-center '
       }`}
     >
       <div className='grid place-items-center  w-full h-fit '>
