@@ -121,7 +121,7 @@ export default function Home() {
     }
   };
   return (
-    <main className={` h-screen w-screen ${isTranslations ? " ": "grid content-center "}`}>
+    <main className={` h-screen w-screen ${isTranslations ? }`}>
       <div className='grid place-items-center pt-5 '>
         {isFr ? (
           <div

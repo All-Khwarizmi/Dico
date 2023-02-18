@@ -21,7 +21,7 @@ function runMiddleware(
   fn: Function
 ) {
   return new Promise((resolve, reject) => {
-  
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fn(req, res, (result: any) => {
       if (result instanceof Error) {
         return reject(result);

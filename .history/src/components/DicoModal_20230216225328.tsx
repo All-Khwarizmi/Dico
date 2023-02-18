@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import {
   Modal,
   ModalOverlay,
@@ -22,7 +22,7 @@ interface TranslationsFetch {
   translations: Array<Trad>;
 }
 
-const EspModal = () => {
+const DicoModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [word, setWord] = useState('');
   const [translations, setTranslations] = useState<Translations>([]);
@@ -40,7 +40,7 @@ const EspModal = () => {
 
   const fetchDico = async (word: string): Promise<void> => {
     console.log('Fetching..');
-    const url = 'http://localhost:3000/api/esp';
+    const url = 'https://memo2-ten.vercel.app/api/dico';
     const options: RequestInit = {
       method: 'POST',
       headers: {
@@ -49,10 +49,10 @@ const EspModal = () => {
       body: JSON.stringify(word),
     };
     const res = await fetch(url, options);
-  
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = await res.json();
     console.log('Data: ', data);
-  
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { translations }: TranslationsFetch = data;
     setTranslations(translations);
   };
@@ -62,26 +62,26 @@ const EspModal = () => {
         className='rounded-lg bg-gray-400 px-3 py-2 font-bold text-black dark:bg-gray-900 dark:text-white'
         onClick={onOpen}
       >
-        ESP - FR
+        FR - ESP
       </button>
 
       <Modal size={'xl'} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent className='text-center dark:bg-gray-700 dark:text-white '>
-          <ModalHeader className='pb-5 uppercase text-2xl font-bold '>
-            Espagnol - Français
+          <ModalHeader className='pb-5 text-2xl font-bold '>
+            Français - Espagnol
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody className='min-h-300  '>
-            <div className='  text-black'>
-              <div className='w-fit '>
-                <table className='   text-left text-sm text-gray-500 dark:text-gray-400'>
+            <div className=' grid-row grid items-center gap-5  text-black'>
+              <div className=' '>
+                <table className='  w-full text-left text-sm text-gray-500 dark:text-gray-400'>
                   <thead
                     className={`sticky ${
                       translations.length ? null : 'hidden'
                     }  top-0 bg-gray-50 bg-gray-400 text-xs uppercase  text-gray-700  dark:bg-gray-900 dark:text-gray-400`}
                   >
-                    <tr className='  '>
+                    <tr className='w-[100%]  '>
                       <th scope='col' className=' px-6 py-3'>
                         Dans le sens de
                       </th>
@@ -124,7 +124,7 @@ const EspModal = () => {
                   id='word'
                 />
                 <button
-                  className='bg-gray-700 px-3 dark:text-white dark:bg-gray-900 rounded-lg rounded-l-none bg-gray-400 px-3  py-1.5 font-bold font-bold dark:bg-gray-900 dark:text-white'
+                  className='bg-gray-700px-3 dark:text-whitedark:bg-gray-900 rounded-lg rounded-l-none bg-gray-400 px-3  py-1.5 font-bold font-bold dark:bg-gray-900 dark:text-white'
                   type='submit'
                 >
                   Chercher
@@ -146,4 +146,4 @@ const EspModal = () => {
   );
 };
 
-export default EspModal;
+export default DicoModal;

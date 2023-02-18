@@ -1,11 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'cors';
+import { useState } from 'react';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const checkDb = async () => {
-  const db = await prisma.word.findMany();
+type Trad = {
+  source: string;
+  target: string;
 };
+type Translations = Array<Trad>;
+interface TranslationsFetch {
+  translations: Array<Trad>;
+}
+
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
 const cors = Cors({
@@ -21,7 +28,7 @@ function runMiddleware(
   fn: Function
 ) {
   return new Promise((resolve, reject) => {
-  
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fn(req, res, (result: any) => {
       if (result instanceof Error) {
         return reject(result);
@@ -42,18 +49,21 @@ export default async function handler(
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
   /*  Fetch only one word and no all of them  */
 
-  const db = await prisma.word.findFirst({
-    where: {
-      source: JSON.parse(req.body),
-    },
+
+  const db= await prisma.word.findFirst({
+    where : {
+      source: JSON.parse(req.body)
+    }
   });
 
-  // res.json({message: 'No data in DB'});
+
+// res.json({message: 'No data in DB'});
   /* const wordFromDb = db?.filter((word) => word.source === JSON.parse(req.body)); */
 
   try {
     if (db) {
-      res.json({ source: req.body, translations: db.word, db: true });
+       
+      res.json({source: req.body, translations: db.word});
     } else {
       const options: RequestInit = {
         method: 'GET',
@@ -68,10 +78,7 @@ export default async function handler(
       const data = await response.json();
 
       // Parsing  data
-      type Trad = {
-        source: string;
-        target: string;
-      };
+
       const translations: Array<Trad> =
         data[0].hits[0].roms[0].arabs[0].translations;
       const source: string = data[0].hits[0].roms[0].headword;
@@ -86,11 +93,11 @@ export default async function handler(
           source: source,
         },
       });
-      res.json({ source, translations, db: false });
+      res.json({ source, translations });
     }
   } catch (error) {
     console.log(error);
 
     res.json({ message: 'Something went wrong' });
-  }
+  } 
 }

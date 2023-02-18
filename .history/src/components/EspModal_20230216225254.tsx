@@ -49,10 +49,10 @@ const EspModal = () => {
       body: JSON.stringify(word),
     };
     const res = await fetch(url, options);
-  
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = await res.json();
     console.log('Data: ', data);
-  
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { translations }: TranslationsFetch = data;
     setTranslations(translations);
   };
