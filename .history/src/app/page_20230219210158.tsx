@@ -199,7 +199,7 @@ console.log(check)
           </p>
         )}
         {isTranslations && (
-          <div className=' h-72  md:h-96 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+          <div className=' h-72 max-h-72 md:max-h-96 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>
               <div className=''>
                 <table className='max-h-max  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
