@@ -36,7 +36,7 @@ export default function Home() {
     setIsError(false)
     let check = word.trim().split(' ').length;
     
-
+   console.log('Checking', mot);
     if (check > 1) {
       window.alert('1 mot à la fois');
       return setWord('');
