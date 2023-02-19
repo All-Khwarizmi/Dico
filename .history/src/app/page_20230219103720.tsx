@@ -33,7 +33,7 @@ export default function Home() {
 
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsError(false)
+setIsError(fal)
     let check = word.trim().split(' ').length;
     console.log('Checking', check);
     if (check > 1) {
@@ -58,7 +58,7 @@ export default function Home() {
     console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
-    const url = 'https://dico-ochre.vercel.app/api/dico';
+    const url = 'http://localhost:3000/api/dico';
     const options: RequestInit = {
       method: 'POST',
       headers: {
@@ -98,7 +98,7 @@ export default function Home() {
   };
   const fetchDicoEsp = async (word: string): Promise<void> => {
     console.log('Fetching..');
-    const url = 'https://dico-ochre.vercel.app/api/esp';
+    const url = 'http://localhost:3000/api/esp';
     const options: RequestInit = {
       method: 'POST',
       headers: {
