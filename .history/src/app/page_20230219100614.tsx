@@ -30,17 +30,18 @@ export default function Home() {
   const [isError, setIsError] = useState<Boolean>(false);
   const [isTranslations, setIsTranslations] = useState<Boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
+  console.log(isError)
 
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+ 
     let check = word.trim().split(' ').length;
     console.log('Checking', check);
     if (check > 1) {
       window.alert('1 mot à la fois');
-      return setWord('');
-    }
-
+     return  setWord("")
+    }   
+    
     setIsLoading(true);
 
     if (isFr)
@@ -58,7 +59,7 @@ export default function Home() {
     console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
-    const url = 'http://localhost:3000/api/dico';
+    const url = 'http://localhost:3000/api/dico'; ;
     const options: RequestInit = {
       method: 'POST',
       headers: {
@@ -67,14 +68,9 @@ export default function Home() {
       body: JSON.stringify(word),
     };
     const res = await fetch(url, options);
+    if (!res.ok) return setIsError(true)
 
-    if (!res.ok) {
-      setIsError(true);
-      setIsLoading(false);
-      return setWord('');
-    }
-
-    const data = await res.json();
+     const data = await res.json();
     console.log('Data: ', data);
 
     const { translations, db } = data;
@@ -85,8 +81,11 @@ export default function Home() {
         });
         console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
+       
+      
       } else {
         setTranslations(translations);
+          
       }
 
       setIsTranslations(true);
@@ -98,7 +97,7 @@ export default function Home() {
   };
   const fetchDicoEsp = async (word: string): Promise<void> => {
     console.log('Fetching..');
-    const url = 'http://localhost:3000/api/esp';
+    const url = 'https://dico-ochre.vercel.app/api/esp';
     const options: RequestInit = {
       method: 'POST',
       headers: {
@@ -107,12 +106,8 @@ export default function Home() {
       body: JSON.stringify(word),
     };
     const res = await fetch(url, options);
-
-    if (!res.ok) {
-      setIsError(true);
-      setIsLoading(false);
-      return setWord('');
-    }
+console.log(res.status, res)
+    if (!res.ok) return setIsError(true);
 
     const data = await res.json();
     console.log('Data: ', data);
@@ -184,16 +179,11 @@ export default function Home() {
       <div className='flex flex-col h-[80%] items-center gap-5'>
         {isLoading ? (
           !isTranslations ? (
-            <p className='dark:text-green-400 text-black text-2xl font-bold'>
+            <p className='dark:text-white text-black text-2xl font-bold'>
               Loading...
             </p>
           ) : null
         ) : null}
-        {isError && (
-          <p className='dark:text-red-500 text-black text-2xl font-bold'>
-            Ce mot n'est pas dans la basse de données.
-          </p>
-        )}
         {isTranslations && (
           <div className=' min-h-min max-h-72 md:max-h-96 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>

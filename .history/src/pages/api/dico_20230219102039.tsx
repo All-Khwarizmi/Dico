@@ -41,7 +41,7 @@ export default async function handler(
 
   if (req.method === 'GET')
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
-
+    
   /*  Fetch only one word and no all of them  */
 
   const db = await prisma.word.findFirst({
@@ -69,11 +69,6 @@ export default async function handler(
       const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=fr&language=es&l=esfr`;
       const response = await fetch(url, options);
 
-      // check res status
-      console.log('Response', response.status, response.statusText);
-      if (response.statusText === 'No Content' || response.status > 201)
-        return res.status(400).json({ message: 'Something went wrong' });
-        
       const data = await response.json();
 
       // Parsing  data

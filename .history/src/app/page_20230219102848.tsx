@@ -191,7 +191,7 @@ export default function Home() {
         ) : null}
         {isError && (
           <p className='dark:text-red-500 text-black text-2xl font-bold'>
-            Ce mot n'est pas dans la basse de données.
+            Ce mot n'est pas dans la basse de données
           </p>
         )}
         {isTranslations && (

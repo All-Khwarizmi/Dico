@@ -73,7 +73,6 @@ export default async function handler(
       console.log('Response', response.status, response.statusText);
       if (response.statusText === 'No Content' || response.status > 201)
         return res.status(400).json({ message: 'Something went wrong' });
-        
       const data = await response.json();
 
       // Parsing  data

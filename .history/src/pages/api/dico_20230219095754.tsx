@@ -38,10 +38,8 @@ export default async function handler(
 ) {
   // Run the middleware
   await runMiddleware(req, res, cors);
-
   if (req.method === 'GET')
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
-
   /*  Fetch only one word and no all of them  */
 
   const db = await prisma.word.findFirst({
@@ -55,9 +53,7 @@ export default async function handler(
 
   try {
     if (db) {
-      res
-        .status(200)
-        .json({ source: req.body, translations: db.word, db: true });
+      res.json({ source: req.body, translations: db.word, db: true });
     } else {
       const options: RequestInit = {
         method: 'GET',
@@ -69,11 +65,6 @@ export default async function handler(
       const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=fr&language=es&l=esfr`;
       const response = await fetch(url, options);
 
-      // check res status
-      console.log('Response', response.status, response.statusText);
-      if (response.statusText === 'No Content' || response.status > 201)
-        return res.status(400).json({ message: 'Something went wrong' });
-        
       const data = await response.json();
 
       // Parsing  data
@@ -95,11 +86,11 @@ export default async function handler(
           source: source,
         },
       });
-      res.status(200).json({ source, translations, db: false });
+      res.json({ source, translations, db: false });
     }
   } catch (error) {
     console.log(error);
 
-    res.status(400).json({ message: 'Something went wrong' });
+    res.status(json({ message: 'Something went wrong' });
   }
 }

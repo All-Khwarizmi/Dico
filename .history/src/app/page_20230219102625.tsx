@@ -70,8 +70,7 @@ export default function Home() {
 
     if (!res.ok) {
       setIsError(true);
-      setIsLoading(false);
-      return setWord('');
+      return;
     }
 
     const data = await res.json();
@@ -108,11 +107,7 @@ export default function Home() {
     };
     const res = await fetch(url, options);
 
-    if (!res.ok) {
-      setIsError(true);
-      setIsLoading(false);
-      return setWord('');
-    }
+    if (!res.ok) return setIsError(true);
 
     const data = await res.json();
     console.log('Data: ', data);
@@ -184,14 +179,14 @@ export default function Home() {
       <div className='flex flex-col h-[80%] items-center gap-5'>
         {isLoading ? (
           !isTranslations ? (
-            <p className='dark:text-green-400 text-black text-2xl font-bold'>
+            <p className='dark:text-white text-black text-2xl font-bold'>
               Loading...
             </p>
           ) : null
         ) : null}
         {isError && (
-          <p className='dark:text-red-500 text-black text-2xl font-bold'>
-            Ce mot n'est pas dans la basse de données.
+          <p className='dark:text-white text-black text-2xl font-bold'>
+            Ce mot n'est pas dans la basse de données
           </p>
         )}
         {isTranslations && (
