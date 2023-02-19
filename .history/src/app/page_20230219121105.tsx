@@ -202,7 +202,7 @@ export default function Home() {
           <div className=' min-h-72 max-h-72 md:max-h-96 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>
               <div className=''>
-                <table className='max-h-max h-60 relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
+                <table className='max-h-max relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
                   <thead className='  sticky top-0 bg-gray-400 dark:bg-gray-900 text-xs uppercase text-gray-700 '>
                     <tr className='pb-4'>
                       <th
@@ -219,11 +219,11 @@ export default function Home() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-gray-800 '>
+                  <tbody className='bg-gray-800  '>
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr
-                          className='border-b   text-center bg-white  dark:border-gray-700 dark:bg-gray-800'
+                          className='border-b  h-20 text-center bg-white  dark:border-gray-700 dark:bg-gray-800'
                           key={index}
                         >
                           <td className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>
