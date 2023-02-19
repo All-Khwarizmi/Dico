@@ -69,8 +69,7 @@ export default function Home() {
     const res = await fetch(url, options);
 
     if (!res.ok) {
-      setIsError(true)
-      setIsTranslations(false)
+      setIsError(true);
       setIsLoading(false);
       return setWord('');
     }
@@ -109,10 +108,8 @@ export default function Home() {
     };
     const res = await fetch(url, options);
 
-   
     if (!res.ok) {
       setIsError(true);
-      setIsTranslations(false);
       setIsLoading(false);
       return setWord('');
     }

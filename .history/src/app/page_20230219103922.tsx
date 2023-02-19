@@ -35,7 +35,7 @@ export default function Home() {
     e.preventDefault();
     setIsError(false)
     let check = word.trim().split(' ').length;
-   // console.log('Checking', check);
+    console.log('Checking', check);
     if (check > 1) {
       window.alert('1 mot à la fois');
       return setWord('');
@@ -69,8 +69,7 @@ export default function Home() {
     const res = await fetch(url, options);
 
     if (!res.ok) {
-      setIsError(true)
-      setIsTranslations(false)
+      setIsError(true);
       setIsLoading(false);
       return setWord('');
     }
@@ -109,10 +108,8 @@ export default function Home() {
     };
     const res = await fetch(url, options);
 
-   
     if (!res.ok) {
       setIsError(true);
-      setIsTranslations(false);
       setIsLoading(false);
       return setWord('');
     }
