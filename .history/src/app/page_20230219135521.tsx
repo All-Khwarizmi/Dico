@@ -39,7 +39,10 @@ console.log(check)
     if (check > 1 ) {
       window.alert('1 mot à la fois');
       return setWord('');
-    } 
+    } else if ( check < 1) {
+      window.alert('Que voulez-vous chercher?');
+      return setWord('');
+    }
 
     setIsLoading(true);
 

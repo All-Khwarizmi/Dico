@@ -35,11 +35,11 @@ export default function Home() {
     e.preventDefault();
     setIsError(false);
     let check = word.trim().split(' ').length;
-console.log(check)
-    if (check > 1 ) {
+
+    if (check > 1) {
       window.alert('1 mot à la fois');
       return setWord('');
-    } 
+    }
 
     setIsLoading(true);
 
@@ -244,7 +244,6 @@ console.log(check)
 
         <form className='text-black  ' onSubmit={(e) => submitWord(e)}>
           <input
-          required
             onChange={(event) => inputWord(event)}
             value={word}
             placeholder='Que veux-tu chercher?'
