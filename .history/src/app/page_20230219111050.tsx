@@ -142,7 +142,7 @@ export default function Home() {
   };
   return (
     <main
-      className={`md:h-full h-[90%] ${
+      className={`md:h-full h-[] ${
         isTranslations ? 'grid content-center ' : 'grid content-center '
       }`}
     >
