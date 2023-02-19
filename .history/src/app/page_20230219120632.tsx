@@ -219,7 +219,7 @@ export default function Home() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-gray-800 h-20 '>
+                  <tbody className='bg-gray-800 className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white '>
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr

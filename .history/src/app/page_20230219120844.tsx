@@ -219,7 +219,7 @@ export default function Home() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-gray-800 h-20 '>
+                  <tbody className='bg-gray-800 h-30 '>
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr

@@ -33,8 +33,9 @@ export default function Home() {
 
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsError(false);
+    setIsError(false)
     let check = word.trim().split(' ').length;
+    
 
     if (check > 1) {
       window.alert('1 mot à la fois');
@@ -47,9 +48,7 @@ export default function Home() {
       return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
         console.log(err)
       );
-    fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) =>
-      console.log(err)
-    );
+    fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) => console.log(err));
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +56,7 @@ export default function Home() {
   };
 
   const fetchDico = async (word: string): Promise<void> => {
-    //  console.log('Fetching..');
+   //  console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
     const url = 'https://dico-ochre.vercel.app/api/dico';
@@ -71,14 +70,14 @@ export default function Home() {
     const res = await fetch(url, options);
 
     if (!res.ok) {
-      setIsError(true);
-      setIsTranslations(false);
+      setIsError(true)
+      setIsTranslations(false)
       setIsLoading(false);
       return setWord('');
     }
 
     const data = await res.json();
-    // console.log('Data: ', data);
+   // console.log('Data: ', data);
 
     const { translations, db } = data;
     try {
@@ -86,7 +85,7 @@ export default function Home() {
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
-        //   console.log('Parsed Data: ', parsedTrads);
+     //   console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
       } else {
         setTranslations(translations);
@@ -111,6 +110,7 @@ export default function Home() {
     };
     const res = await fetch(url, options);
 
+   
     if (!res.ok) {
       setIsError(true);
       setIsTranslations(false);
@@ -127,7 +127,7 @@ export default function Home() {
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
-        // console.log('Parsed Data: ', parsedTrads);
+       // console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
       } else {
         setTranslations(translations);
@@ -219,19 +219,24 @@ export default function Home() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className='bg-gray-800 h-20 '>
+                  <tbody className='bg-gray-800 '>
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr
                           className='border-b   text-center bg-white  dark:border-gray-700 dark:bg-gray-800'
                           key={index}
                         >
-                          <td className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>
-                            {parse(trad?.source)}
+                          <td className='px-6  '>
+                            <th className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>
+                              {parse(trad?.source)}
+                            </th>
                           </td>
-                          <td className=' text-center px-6 font-medium text-gray-900 dark:text-white'>
+                          <th
+                            scope='row'
+                            className=' text-center px-6 font-medium text-gray-900 dark:text-white'
+                          >
                             {parse(trad?.target)}
-                          </td>
+                          </th>
                         </tr>
                       );
                     })}

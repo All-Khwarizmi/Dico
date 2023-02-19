@@ -226,7 +226,7 @@ export default function Home() {
                           className='border-b   text-center bg-white  dark:border-gray-700 dark:bg-gray-800'
                           key={index}
                         >
-                          <td className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>
+                          <td className='py-5 text-center px-6  font-medium text-gray-900 dark:text-white'>
                             {parse(trad?.source)}
                           </td>
                           <td className=' text-center px-6 font-medium text-gray-900 dark:text-white'>
