@@ -35,7 +35,7 @@ export default function Home() {
     e.preventDefault();
     setIsError(false)
     let check = word.trim().split(' ').length;
-    let mot = word.trim().toLocaleLowerCase();
+    let mot = word.trim().split(' ');
    console.log('Checking', mot);
     if (check > 1) {
       window.alert('1 mot à la fois');
@@ -45,10 +45,10 @@ export default function Home() {
     setIsLoading(true);
 
     if (isFr)
-      return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
+      return fetchDico(word.toLocaleLowerCase()).catch((err) =>
         console.log(err)
       );
-    fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) => console.log(err));
+    fetchDicoEsp(word.toLocaleLowerCase()).catch((err) => console.log(err));
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {

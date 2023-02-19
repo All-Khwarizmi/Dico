@@ -48,7 +48,7 @@ export default function Home() {
       return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
         console.log(err)
       );
-    fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) => console.log(err));
+    fetchDicoEsp(word.trim()toLocaleLowerCase()).catch((err) => console.log(err));
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {

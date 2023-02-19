@@ -35,8 +35,7 @@ export default function Home() {
     e.preventDefault();
     setIsError(false)
     let check = word.trim().split(' ').length;
-    let mot = word.trim().toLocaleLowerCase();
-   console.log('Checking', mot);
+   // console.log('Checking', check);
     if (check > 1) {
       window.alert('1 mot à la fois');
       return setWord('');
@@ -45,10 +44,10 @@ export default function Home() {
     setIsLoading(true);
 
     if (isFr)
-      return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
+      return fetchDico(word.toLocaleLowerCase()).catch((err) =>
         console.log(err)
       );
-    fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) => console.log(err));
+    fetchDicoEsp(word.toLocaleLowerCase()).catch((err) => console.log(err));
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +55,7 @@ export default function Home() {
   };
 
   const fetchDico = async (word: string): Promise<void> => {
-   //  console.log('Fetching..');
+    console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
     const url = 'https://dico-ochre.vercel.app/api/dico';
@@ -77,7 +76,7 @@ export default function Home() {
     }
 
     const data = await res.json();
-   // console.log('Data: ', data);
+    console.log('Data: ', data);
 
     const { translations, db } = data;
     try {
@@ -85,7 +84,7 @@ export default function Home() {
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
-     //   console.log('Parsed Data: ', parsedTrads);
+        console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
       } else {
         setTranslations(translations);
