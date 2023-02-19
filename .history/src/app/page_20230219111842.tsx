@@ -199,7 +199,7 @@ export default function Home() {
           </p>
         )}
         {isTranslations && (
-          <div className=' min-h-60 max-h-72 md:max-h-96 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
+          <div className=' min-h-72 max-h-72 md:max-h-96 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll rounded border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 '>
             <div className='text-black '>
               <div className=''>
                 <table className='  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
