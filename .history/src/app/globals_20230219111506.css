@@ -119,8 +119,6 @@ a {
   color: red;
 
 } */
-@media only screen and (min-device-width : 300px) and (max-device-width : 480px) {
-body {
-  height: 90vh;
-}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+bod
 }
