@@ -223,7 +223,7 @@ export default function Home() {
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr
-                          className={` border-b ${translations.length > 1?  null : "h-40"}   text-center bg-white  dark:border-gray-700 dark:bg-gray-800`}
+                          className={` `}
                           key={index}
                         >
                           <td className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>

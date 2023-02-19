@@ -204,7 +204,7 @@ export default function Home() {
               <div className=''>
                 <table className='max-h-max  relative w-full text-left text-sm text-gray-500 dark:text-gray-400'>
                   <thead className='  sticky top-0 bg-gray-400 dark:bg-gray-900 text-xs uppercase text-gray-700 '>
-                    <tr className='pb-4 '>
+                    <tr className='pb-4'>
                       <th
                         scope='col'
                         className='px-6 font-bold text-black text-center dark:text-white py-3 '
@@ -223,7 +223,7 @@ export default function Home() {
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr
-                          className={` border-b ${translations.length > 1?  null : "h-40"}   text-center bg-white  dark:border-gray-700 dark:bg-gray-800`}
+                          className='border-b   text-center bg-white  dark:border-gray-700 dark:bg-gray-800'
                           key={index}
                         >
                           <td className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>
