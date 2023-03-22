@@ -1,8 +1,0 @@
-{
-  "extends": "plugin:@typescript-eslint/recommended-requiring-type-checking",
-   "rules": {
-   
-     "react/no-unescaped-entities": "warn"
-   
-  }
-}
