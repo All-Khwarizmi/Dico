@@ -35,11 +35,11 @@ export default function Home() {
     e.preventDefault();
     setIsError(false);
     let check = word.trim().split(' ').length;
-    console.log(check);
-    if (check > 1) {
+console.log(check)
+    if (check > 1 ) {
       window.alert('1 mot à la fois');
       return setWord('');
-    }
+    } 
 
     setIsLoading(true);
 
@@ -223,9 +223,7 @@ export default function Home() {
                     {translations?.map((trad: Trad, index) => {
                       return (
                         <tr
-                          className={` border-b ${
-                            translations.length > 1 ? null : 'h-40'
-                          }   text-center bg-white  dark:border-gray-700 dark:bg-gray-800`}
+                          className={` border-b ${translations.length > 1?  null : "h-40"}   text-center bg-white  dark:border-gray-700 dark:bg-gray-800`}
                           key={index}
                         >
                           <td className='py-4 text-center px-6  font-medium text-gray-900 dark:text-white'>
@@ -246,7 +244,7 @@ export default function Home() {
 
         <form className='text-black  ' onSubmit={(e) => submitWord(e)}>
           <input
-            required
+          required
             onChange={(event) => inputWord(event)}
             value={word}
             placeholder='Que veux-tu chercher?'
