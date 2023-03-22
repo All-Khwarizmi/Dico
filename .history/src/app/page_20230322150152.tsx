@@ -60,7 +60,7 @@ console.log(check)
     //  console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
-    const url = 'https://dico-ochre.vercel.app/api/dico';
+    const url = 'http://localhost:3000/api/dico';
     const options: RequestInit = {
       method: 'POST',
       headers: {
