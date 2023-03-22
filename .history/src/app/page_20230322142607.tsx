@@ -101,7 +101,7 @@ console.log(check)
   };
   const fetchDicoEsp = async (word: string): Promise<void> => {
     // console.log('Fetching..');
-    const url = 'http://localhost:3000/api/esp';
+    const url = 'http://localhost:3000/api/dico';
     const options: RequestInit = {
       method: 'POST',
       headers: {

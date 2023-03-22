@@ -50,13 +50,13 @@ export default async function handler(
         source: JSON.parse(req.body),
       },
     });
+    console.log('db:', db);
     if (db) {
       res
         .status(200)
         .json({ source: req.body, translations: db.word, db: true });
     }
-  } catch (error) {
-    console.log(error)
+  } finally {
     try {
       const options: RequestInit = {
         method: 'GET',
@@ -96,12 +96,11 @@ export default async function handler(
             source: source,
           },
         });
-      } catch (error) {
-        console.log(error);
+      } finally {
+        res.status(200).json({ source, translations, db: false });
       }
-      res.status(200).json({ source, translations, db: false });
-    } catch (error) {
-       console.log(error);
+    } catch {
+      // console.log(error);
 
       res.status(400).json({ message: 'Something went wrong' });
     }

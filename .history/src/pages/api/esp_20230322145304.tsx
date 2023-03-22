@@ -3,11 +3,6 @@ import Cors from 'cors';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-// Fn that checks if searched word is in DB
-const checkDb = async () => {
-  const db = await prisma.word.findMany();
-};
-
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
 const cors = Cors({
@@ -19,6 +14,7 @@ const cors = Cors({
 function runMiddleware(
   req: NextApiRequest,
   res: NextApiResponse,
+
   fn: Function
 ) {
   return new Promise((resolve, reject) => {
@@ -38,12 +34,11 @@ export default async function handler(
 ) {
   // Run the middleware
   await runMiddleware(req, res, cors);
-
   if (req.method === 'GET')
     return res.status(403).send({ message: 'Only POST resquest are allowed' });
+  // Rest of the API logic
 
   /*  Fetch only one word and no all of them  */
-
   try {
     const db = await prisma.word.findFirst({
       where: {
@@ -65,7 +60,8 @@ export default async function handler(
         },
       };
 
-      const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=fr&language=es&l=esfr`;
+      const url = `https://api.pons.com/v1/dictionary?q=${req.body}&in=es&language=fr&l=esfr`;
+      console.log('Got a spanish - french  request', req.body, req.method);
       const response = await fetch(url, options);
 
       // check res status
@@ -87,21 +83,16 @@ export default async function handler(
       const translationsString = translations.map((trad) => {
         return JSON.stringify(trad);
       });
-
-      try {
-        // "Cashing" data to  primary postgres db
-        const pushDb = await prisma.word.create({
-          data: {
-            word: translationsString,
-            source: source,
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      try 
+      const pushDb = await prisma.word.create({
+        data: {
+          word: translationsString,
+          source: source,
+        },
+      });
       res.status(200).json({ source, translations, db: false });
     } catch (error) {
-       console.log(error);
+      console.log(error);
 
       res.status(400).json({ message: 'Something went wrong' });
     }

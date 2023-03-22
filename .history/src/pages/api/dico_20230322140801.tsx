@@ -12,6 +12,7 @@ const checkDb = async () => {
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
 const cors = Cors({
   methods: ['POST', 'GET', 'HEAD'],
+  
 });
 
 // Helper method to wait for a middleware to execute before continuing
@@ -19,9 +20,11 @@ const cors = Cors({
 function runMiddleware(
   req: NextApiRequest,
   res: NextApiResponse,
+
   fn: Function
 ) {
   return new Promise((resolve, reject) => {
+  
     fn(req, res, (result: any) => {
       if (result instanceof Error) {
         return reject(result);
@@ -44,20 +47,21 @@ export default async function handler(
 
   /*  Fetch only one word and no all of them  */
 
+  const db = await prisma.word.findFirst({
+    where: {
+      source: JSON.parse(req.body),
+    },
+  });
+
+  // res.json({message: 'No data in DB'});
+  /* const wordFromDb = db?.filter((word) => word.source === JSON.parse(req.body)); */
+
   try {
-    const db = await prisma.word.findFirst({
-      where: {
-        source: JSON.parse(req.body),
-      },
-    });
     if (db) {
       res
         .status(200)
         .json({ source: req.body, translations: db.word, db: true });
-    }
-  } catch (error) {
-    console.log(error)
-    try {
+    } else {
       const options: RequestInit = {
         method: 'GET',
         headers: {
@@ -72,7 +76,7 @@ export default async function handler(
       console.log('Response', response.status, response.statusText);
       if (response.statusText === 'No Content' || response.status > 201)
         return res.status(400).json({ message: 'Something went wrong' });
-
+        
       const data = await response.json();
 
       // Parsing  data
@@ -87,23 +91,19 @@ export default async function handler(
       const translationsString = translations.map((trad) => {
         return JSON.stringify(trad);
       });
-
-      try {
-        // "Cashing" data to  primary postgres db
-        const pushDb = await prisma.word.create({
-          data: {
-            word: translationsString,
-            source: source,
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+ 
+      // "Cashing" data to  primary postgres db
+      const pushDb = await prisma.word.create({
+        data: {
+          word: translationsString,
+          source: source,
+        },
+      });
       res.status(200).json({ source, translations, db: false });
-    } catch (error) {
-       console.log(error);
-
-      res.status(400).json({ message: 'Something went wrong' });
     }
+  } catch (error) {
+    console.log(error);
+
+    res.status(400).json({ message: 'Something went wrong' });
   }
 }

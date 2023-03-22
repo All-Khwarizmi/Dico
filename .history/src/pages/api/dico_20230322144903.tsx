@@ -55,8 +55,7 @@ export default async function handler(
         .status(200)
         .json({ source: req.body, translations: db.word, db: true });
     }
-  } catch (error) {
-    console.log(error)
+  } finally {
     try {
       const options: RequestInit = {
         method: 'GET',
