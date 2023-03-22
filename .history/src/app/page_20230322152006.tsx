@@ -2,7 +2,9 @@
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import { FaArrowLeft } from 'react-icons/fa';
+import { BsArrowRight } from 'react-icons/bs';
 import { FaArrowRight } from 'react-icons/fa';
+
 const inter = Inter({ subsets: ['latin'] });
 import parse from 'html-react-parser';
 import { useState } from 'react';
@@ -31,7 +33,7 @@ export default function Home() {
     e.preventDefault();
     setIsError(false);
     let check = word.trim().split(' ').length;
-
+    console.log(check);
     if (check > 1) {
       window.alert('1 mot à la fois');
       return setWord('');
