@@ -55,8 +55,8 @@ export default async function handler(
         .status(200)
         .json({ source: req.body, translations: db.word, db: true });
     }
-  } finally {
-   
+  } catch (error) {
+    console.log('First catch', error);
     try {
       const options: RequestInit = {
         method: 'GET',
@@ -88,8 +88,8 @@ export default async function handler(
         return JSON.stringify(trad);
       });
 
-      // "Cashing" data to  primary postgres db
       try {
+        // "Cashing" data to  primary postgres db
         const pushDb = await prisma.word.create({
           data: {
             word: translationsString,
@@ -99,9 +99,8 @@ export default async function handler(
       } catch (error) {
         console.log('Second catch', error);
       }
-
+      
       res.status(200).json({ source, translations, db: false });
-
     } catch (error) {
       console.log('Third catch', error);
 
