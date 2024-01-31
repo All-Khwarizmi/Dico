@@ -92,6 +92,9 @@ export default function Home() {
         duration: 5000,
         isClosable: true,
       });
+      window.alert(`
+      L'erreur suivante est survenue: ${res.statusText}
+      Veuillez réessayer.`);
       setIsTranslations(false);
       setIsLoading(false);
       return setWord("");
@@ -128,6 +131,9 @@ export default function Home() {
         duration: 5000,
         isClosable: true,
       });
+      window.alert(`
+      L'erreur suivante est survenue: ${res.statusText}
+      Veuillez réessayer.`);
       console.log(err);
     }
   };
@@ -156,6 +162,9 @@ export default function Home() {
         duration: 5000,
         isClosable: true,
       });
+      window.alert(`
+      L'erreur suivante est survenue: ${res.statusText}
+      Veuillez réessayer.`);
       return setWord("");
     }
 
@@ -192,6 +201,9 @@ export default function Home() {
         duration: 5000,
         isClosable: true,
       });
+      window.alert(`
+      L'erreur suivante est survenue: ${res.statusText}
+      Veuillez réessayer.`);
     }
   };
 
@@ -211,7 +223,7 @@ export default function Home() {
           />
           <button
             className="rounded-lg border text-gray-200 border-gray-400 border-1 rounded-l-none  dark:text-white  text-md font-bold 
-            bg-purple-700 px-3 py-1 dark:py-1"
+            bg-gradient-to-r from-purple-700 to-indigo-700 px-3 py-1 dark:py-1"
             type="submit"
           >
             Chercher
@@ -276,7 +288,14 @@ export default function Home() {
       }`}
     >
       <div className="flex flex-col h-[20%] items-center gap-5">
-        <h1 className="text-6xl font-bold dark:text-purple-700 text-black" style={{ background: 'linear-gradient(45deg, #7e22ce, #c0efff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <h1
+          className="text-6xl font-bold dark:text-purple-700 text-black"
+          style={{
+            background: "linear-gradient(45deg, #7e22ce, #c0efff)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
           Dico
         </h1>
         {TranslationDirection(isFr, setIsFR, isTranslations)}
@@ -297,11 +316,7 @@ export default function Home() {
             />
           </div>
         ) : null}
-        {isError && (
-          <p className="dark:text-red-500 text-black text-2xl font-bold">
-            Ce mot n'est pas dans la base de données.
-          </p>
-        )}
+
         {translationsTable}
         {submitForm}
       </div>
