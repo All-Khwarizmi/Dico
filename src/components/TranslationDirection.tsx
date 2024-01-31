@@ -20,7 +20,7 @@ export function TranslationDirection(
             <h1 className="py-5 text-center uppercase text-1xl">Français</h1>
           </button>
           <button onClick={() => setIsFR(!isFr)}>
-            <FaArrowRight className="text-purple-700 text-2xl" />
+            <FaArrowRight className="text-purple-700  text-2xl" />
           </button>
           <button onClick={() => setIsFR(!isFr)}>
             <h1 className="py-5 text-center uppercase text-1xl">Espagnol</h1>

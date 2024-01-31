@@ -132,7 +132,7 @@ export default function Home() {
         isClosable: true,
       });
       window.alert(`
-      L'erreur suivante est survenue: ${res.statusText}
+      Une erreur est survenue: ${res.text}
       Veuillez réessayer.`);
       console.log(err);
     }
@@ -202,7 +202,8 @@ export default function Home() {
         isClosable: true,
       });
       window.alert(`
-      L'erreur suivante est survenue: ${res.statusText}
+      L'erreur suivante est survenue: 
+      - ${res.text}
       Veuillez réessayer.`);
     }
   };
@@ -219,6 +220,7 @@ export default function Home() {
             className="rounded-lg border border-gray-400  dark:text-white border-1 dark:bg-gray-700 rounded-r-none px-3 py-1"
             type="text"
             name="word"
+            autoFocus={true}
             id="word"
           />
           <button
@@ -283,7 +285,7 @@ export default function Home() {
   );
   return (
     <main
-      className={`h-full  ${
+      className={`h-full w-full  ${
         isTranslations ? "grid content-center" : "grid content-center"
       }`}
     >
