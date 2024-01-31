@@ -7,7 +7,7 @@ import parse from "html-react-parser";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Spinner } from "@chakra-ui/react";
 import { MagnifyingGlass } from "react-loader-spinner";
-
+import { useToast } from "@chakra-ui/react";
 type Trad = {
   source: string;
   target: string;
@@ -27,13 +27,21 @@ export default function Home() {
   const [isTranslations, setIsTranslations] = useState<Boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
 
+  const toast = useToast();
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsError(false);
+    setIsLoading(true);
     let check = word.trim().split(" ").length;
 
     if (check > 1) {
-      window.alert("1 mot à la fois");
+      toast({
+        title: "Erreur",
+        description: "Un seul mot à la fois.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return setWord("");
     }
 
@@ -71,6 +79,13 @@ export default function Home() {
 
     if (!res.ok) {
       setIsError(true);
+      toast({
+        title: "Erreur",
+        description: res.statusText,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       setIsTranslations(false);
       setIsLoading(false);
       return setWord("");
@@ -97,6 +112,16 @@ export default function Home() {
     } catch (err) {
       setIsLoading(false);
       setIsError(true);
+      toast({
+        title: "Erreur",
+        description: `
+        L'erreur suivante est survenue: ${err}
+        Veuillez réessayer.
+        `,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       console.log(err);
     }
   };
@@ -118,6 +143,13 @@ export default function Home() {
       setIsError(true);
       setIsTranslations(false);
       setIsLoading(false);
+      toast({
+        title: "Erreur",
+        description: res.statusText,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return setWord("");
     }
 
@@ -144,6 +176,16 @@ export default function Home() {
       setIsLoading(false);
       setIsError(true);
       console.log(err);
+      toast({
+        title: "Erreur",
+        description: `
+        L'erreur suivante est survenue: ${err}
+        Veuillez réessayer.
+        `,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -236,20 +278,18 @@ export default function Home() {
 
       <div className="flex flex-col items-center gap-5">
         {isLoading ? (
-          !isTranslations ? (
-            <div className="dark:text-green-400 flex flex-col items-center h-full w-full text-black font-bold">
-              <MagnifyingGlass
-                visible={true}
-                height="80"
-                width="80"
-                ariaLabel="magnifying-glass-loading"
-                wrapperStyle={{}}
-                wrapperClass="magnifying-glass-wrapper"
-                glassColor="#c0efff"
-                color="#7e22ce"
-              />
-            </div>
-          ) : null
+          <div className="dark:text-green-400 flex flex-col items-center h-full w-full text-black font-bold">
+            <MagnifyingGlass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="magnifying-glass-loading"
+              wrapperStyle={{}}
+              wrapperClass="magnifying-glass-wrapper"
+              glassColor="#c0efff"
+              color="#7e22ce"
+            />
+          </div>
         ) : null}
         {isError && (
           <p className="dark:text-red-500 text-black text-2xl font-bold">
