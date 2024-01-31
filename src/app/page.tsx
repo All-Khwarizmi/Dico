@@ -74,7 +74,7 @@ export default function Home() {
     const options: RequestInit = {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(word),
     };
@@ -143,7 +143,7 @@ export default function Home() {
     const options: RequestInit = {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain;charset=UTF-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(word),
     };
