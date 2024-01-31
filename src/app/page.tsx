@@ -276,7 +276,7 @@ export default function Home() {
       }`}
     >
       <div className="flex flex-col h-[20%] items-center gap-5">
-        <h1 className="text-6xl font-bold dark:text-purple-700 text-black">
+        <h1 className="text-6xl font-bold dark:text-purple-700 text-black" style={{ background: 'linear-gradient(45deg, #7e22ce, #c0efff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           Dico
         </h1>
         {TranslationDirection(isFr, setIsFR, isTranslations)}
