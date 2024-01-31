@@ -12,7 +12,7 @@ const checkDb = async () => {
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
 const cors = Cors({
   methods: ["POST", "GET", "HEAD"],
-  origin: ["https://dico-uno.vercel.app", "http://localhost:3000"],
+  origin: "*",
 });
 
 // Helper method to wait for a middleware to execute before continuing
