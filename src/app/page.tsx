@@ -36,6 +36,8 @@ export default function Home() {
     let check = word.trim().split(" ").length;
 
     if (check > 1) {
+      setIsLoading(false);
+      console.log(check);
       toast({
         title: "Erreur",
         description: "Un seul mot à la fois.",
