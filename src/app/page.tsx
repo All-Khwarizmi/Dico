@@ -42,19 +42,22 @@ export default function Home() {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top",
       });
-      return setWord("");
-    }
+      window.alert("Un seul mot à la fois.");
+      setWord("");
+      return;
+    } else {
+      setIsLoading(true);
 
-    setIsLoading(true);
-
-    if (isFr)
-      return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
+      if (isFr)
+        return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
+          console.log(err)
+        );
+      fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) =>
         console.log(err)
       );
-    fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) =>
-      console.log(err)
-    );
+    }
   };
 
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
