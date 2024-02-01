@@ -69,7 +69,7 @@ export default function Home() {
     //  console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
-    const url = "https://dico-uno.vercel.app/api/dico";
+    const url = "http://localhost:3000/api/dico";
     const options: RequestInit = {
       method: "POST",
       headers: {
@@ -137,48 +137,49 @@ export default function Home() {
     }
   };
   const fetchDicoEsp = async (word: string): Promise<void> => {
-    // console.log('Fetching..');
-    const url = "https://dico-uno.vercel.app/api/esp";
-    const options: RequestInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(word),
-    };
+    try {
+      console.log("Fetching in dico ESP..");
+      // console.log('Fetching..');
+      // "http://localhost:3000/api/esp"
+      // "https://dico-uno.vercel.app/api/esp"
+      const url = "http://localhost:3000/api/esp";
+      const options: RequestInit = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: word,
+      };
 
-    setIsLoading(true);
-    const res = await fetch(url, options);
+      setIsLoading(true);
+      const res = await fetch(url, options);
+      console.log("Response", res.status, res.statusText);
+      const data = await res.json();
 
-    if (!res.ok) {
-      setIsError(true);
-      setIsTranslations(false);
-      setIsLoading(false);
-      toast({
-        title: "Erreur",
-        description: res.statusText,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-      window.alert(`
+      if (!res.ok) {
+        console.log("Error in fetchDicoEsp first catch");
+        setIsError(true);
+        setIsTranslations(false);
+        setIsLoading(false);
+        console.log({
+          message: "Error in fetchDicoEsp first catch",
+          response: JSON.stringify(res),
+        });
+        window.alert(`
       L'erreur suivante est survenue: ${res.statusText}
       Veuillez réessayer.`);
-      return setWord("");
-    }
+        return setWord("");
+      }
+      const { translations, db } = data;
 
-    const data = await res.json();
-    // console.log('Data: ', data);
-
-    const { translations, db } = data;
-    try {
       if (db) {
+        console.log("Data fetched from DB");
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
-        // console.log('Parsed Data: ', parsedTrads);
         setTranslations(parsedTrads);
       } else {
+        console.log("Data fetched from API");
         setTranslations(translations);
       }
 
@@ -189,21 +190,11 @@ export default function Home() {
     } catch (err) {
       setIsLoading(false);
       setIsError(true);
-      console.log(err);
-      toast({
-        title: "Erreur",
-        description: `
-        L'erreur suivante est survenue: ${err}
-        Veuillez réessayer.
-        `,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      console.log({ message: "Error in fetchDicoEsp last catch", err });
       window.alert(`
-      L'erreur suivante est survenue: 
-      - ${res.text}
-      Veuillez réessayer.`);
+        L'erreur suivante est survenue: ${err}
+        Veuillez réessayer.`);
+      return setWord("");
     }
   };
 
