@@ -7,8 +7,7 @@ const prisma = new PrismaClient();
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
 const cors = Cors({
   methods: ["POST", "GET", "HEAD", "OPTIONS"],
-  origin: "*",
-  allowedHeaders: ["X-secret", "Content-Type", "Authorization"],
+  origin: ["https://dico-uno.vercel.app", "http://localhost:3000"],
 });
 
 // Helper method to wait for a middleware to execute before continuing
