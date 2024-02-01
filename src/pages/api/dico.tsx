@@ -39,7 +39,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Run the middleware
-  await runMiddleware(req, res, cors);
+  // await runMiddleware(req, res, cors);
 
   if (req.method === "GET")
     return res.status(403).send({ message: "Only POST resquest are allowed" });
