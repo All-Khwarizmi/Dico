@@ -65,6 +65,8 @@ export default function Home() {
   const inputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
     return setWord(e.target.value);
   };
+  const stateBranchEsp = "http://localhost:3000/api/esp";
+  const stateBranchDico = "http://localhost:3000/api/dico";
 
   const fetchDico = async (word: string): Promise<void> => {
     //  console.log('Fetching..');
