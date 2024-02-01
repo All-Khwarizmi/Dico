@@ -69,7 +69,10 @@ export default function Home() {
     //  console.log('Fetching..');
     // 'https://dico-ochre.vercel.app/api/dico'
     // 'http://localhost:3000/api/dico'
-    const url = "http://localhost:3000/api/dico";
+    const url =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/dico"
+        : "https://dico-ochre.vercel.app/api/dico";
     const options: RequestInit = {
       method: "POST",
       headers: {
@@ -142,7 +145,10 @@ export default function Home() {
       // console.log('Fetching..');
       // "http://localhost:3000/api/esp"
       // "https://dico-uno.vercel.app/api/esp"
-      const url = "http://localhost:3000/api/esp";
+      const url =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000/api/esp"
+          : "https://dico-uno.vercel.app/api/esp";
       const options: RequestInit = {
         method: "POST",
         headers: {
