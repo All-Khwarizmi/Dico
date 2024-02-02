@@ -66,45 +66,42 @@ export default function Home() {
   };
 
   const fetchDico = async (word: string): Promise<void> => {
-    console.log("Fetching in dico..");
-    const url =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/dico"
-        : "https://dico-uno.vercel.app/api/dico";
-    const options: RequestInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(word),
-    };
+    try {
+      console.log("Fetching in dico..");
+      const url =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000/api/dico"
+          : "https://dico-uno.vercel.app/api/dico";
+      const options: RequestInit = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(word),
+      };
 
-    setIsLoading(true);
+      setIsLoading(true);
 
-    const res = await fetch(url, options);
+      const res = await fetch(url, options);
 
-    if (!res.ok) {
-      setIsError(true);
-      toast({
-        title: "Erreur",
-        description: res.statusText,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-      window.alert(`
+      if (!res.ok) {
+        setIsError(true);
+        window.alert(`
       L'erreur suivante est survenue: ${res.statusText}
       Veuillez réessayer.`);
-      setIsTranslations(false);
-      setIsLoading(false);
-      return setWord("");
-    }
+        console.log({
+          message: "Error in fetchDico first catch",
+          response: JSON.stringify(res),
+        });
+        setIsTranslations(false);
+        setIsLoading(false);
+        return setWord("");
+      }
 
-    const data = await res.json();
-    // console.log('Data: ', data);
+      const data = await res.json();
+      console.log("Data: ", data);
 
-    const { translations, db } = data;
-    try {
+      const { translations, db } = data;
       if (db) {
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
@@ -121,18 +118,9 @@ export default function Home() {
     } catch (err) {
       setIsLoading(false);
       setIsError(true);
-      toast({
-        title: "Erreur",
-        description: `
-        L'erreur suivante est survenue: ${err}
-        Veuillez réessayer.
-        `,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+
       window.alert(`
-      Une erreur est survenue: ${res.text}
+      Une erreur est survenue: ${err}
       Veuillez réessayer.`);
       console.log(err);
     }
