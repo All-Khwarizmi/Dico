@@ -5,15 +5,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.info("Start of the api in esp.tsx");
-  if (req.method === "GET") {
-    console.error("Return 403");
-    return res.status(403).json({ message: "Only POST resquest are allowed" });
-  }
-
-  // Rest of the API logic
-  console.info({ body: req.body });
   try {
+    console.info("Start of the api in esp.tsx");
+    if (req.method === "GET") {
+      console.error("Return 403");
+      return res
+        .status(403)
+        .json({ message: "Only POST resquest are allowed" });
+    }
+
+    // Rest of the API logic
+    console.info({ body: req.body });
+
     // Fetching data from DB
     console.info("Fetching data from DB");
     const db = await prisma.word.findFirst({
@@ -21,15 +24,15 @@ export default async function handler(
         source: req.body,
       },
     });
+
     if (db) {
       console.info("Data fetched from DB");
       res
         .status(200)
         .json({ source: req.body, translations: db.word, db: true });
-    }
-  } finally {
-    // If not in DB, fetch from API
-    try {
+    } else {
+      // If not in DB, fetch from API
+      console.log("No data in DB");
       const options: RequestInit = {
         method: "GET",
         headers: {
@@ -47,10 +50,10 @@ export default async function handler(
         console.error("Return 400");
         return res.status(400).json({ message: "Something went wrong" });
       }
-
       const data = await response.json();
 
       // Parsing  data
+      console.info("Parsing data");
       type Trad = {
         source: string;
         target: string;
@@ -64,23 +67,19 @@ export default async function handler(
       });
 
       // Cashing to primary postgres DB
-      try {
-        console.info("Cashing to primary postgres DB");
-        const pushDb = await prisma.word.create({
-          data: {
-            word: translationsString,
-            source: source,
-          },
-        });
-      } catch (error) {
-        console.error("Second catch", error);
-      }
+      console.info("Cashing to primary postgres DB");
+      await prisma.word.create({
+        data: {
+          word: translationsString,
+          source: source,
+        },
+      });
 
       res.status(200).json({ source, translations, db: false });
-    } catch (error) {
-      console.error("Third catch", error);
-
-      res.status(400).json({ message: "Something went wrong" });
     }
+  } catch (error) {
+    console.error("Third catch", error);
+
+    res.status(400).json({ message: "Something went wrong" });
   }
 }

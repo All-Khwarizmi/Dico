@@ -5,31 +5,33 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("Start of the api in dico.tsx");
-  if (req.method === "GET") {
-    return res.status(403).send({ message: "Only POST resquest are allowed" });
-  }
-
-  // Rest of the API logic
-  console.info({ body: req.body });
   try {
+    console.info("Start of the api in dico.tsx");
+    if (req.method === "GET") {
+      return res
+        .status(403)
+        .send({ message: "Only POST resquest are allowed" });
+    }
+
+    // Rest of the API infoic
+    console.info({ body: req.body });
+
     // Fetching data from DB
-    console.log("Fetching data from DB");
+    console.info("Fetching data from DB");
     const db = await prisma.word.findFirst({
       where: {
         source: JSON.parse(req.body),
       },
     });
     if (db) {
-      console.log("Data fetched from DB");
+      console.info("Data fetched from DB");
       res
         .status(200)
         .json({ source: req.body, translations: db.word, db: true });
-    }
-  } finally {
-    // If not in DB, fetch from API
-    console.log("Fetching data from API");
-    try {
+    } else {
+      // If not in DB, fetch from API
+      console.info("No data in DB");
+      console.info("Fetching data from API");
       const options: RequestInit = {
         method: "GET",
         headers: {
@@ -41,7 +43,7 @@ export default async function handler(
       const response = await fetch(url, options);
 
       // check res status
-      console.log("Response", response.status, response.statusText);
+      console.info("Response", response.status, response.statusText);
       if (response.statusText === "No Content" || response.status > 201)
         return res.status(400).json({ message: "Something went wrong" });
 
@@ -69,14 +71,13 @@ export default async function handler(
           },
         });
       } catch (error) {
-        console.log("Second catch", error);
+        console.info("Second catch", error);
       }
 
       res.status(200).json({ source, translations, db: false });
-    } catch (error) {
-      console.log("Third catch", error);
-
-      res.status(400).json({ message: "Something went wrong" });
     }
+  } catch (error) {
+    console.error("Error in dico.tsx", error);
+    res.status(400).json({ message: "Something went wrong" });
   }
 }
