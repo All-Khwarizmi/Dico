@@ -10,11 +10,11 @@ export default async function handler(
     if (req.method === "GET") {
       return res
         .status(403)
-        .send({ message: "Only POST resquest are allowed" });
+        .json({ message: "Only POST resquest are allowed" });
     }
 
     // Rest of the API infoic
-    console.info({ body: req.body });
+    console.info({ body: JSON.parse(req.body) });
 
     // Fetching data from DB
     console.info("Fetching data from DB");
