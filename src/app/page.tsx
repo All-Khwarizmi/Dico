@@ -66,13 +66,11 @@ export default function Home() {
   };
 
   const fetchDico = async (word: string): Promise<void> => {
-    //  console.log('Fetching..');
-    // 'https://dico-ochre.vercel.app/api/dico'
-    // 'http://localhost:3000/api/dico'
+    console.log("Fetching in dico..");
     const url =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/dico"
-        : "https://dico-ochre.vercel.app/api/dico";
+        : "https://dico-uno.vercel.app/api/dico";
     const options: RequestInit = {
       method: "POST",
       headers: {
@@ -142,9 +140,7 @@ export default function Home() {
   const fetchDicoEsp = async (word: string): Promise<void> => {
     try {
       console.log("Fetching in dico ESP..");
-      // console.log('Fetching..');
-      // "http://localhost:3000/api/esp"
-      // "https://dico-uno.vercel.app/api/esp"
+
       const url =
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/api/esp"
@@ -154,7 +150,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: word,
+        body: JSON.stringify(word),
       };
 
       setIsLoading(true);

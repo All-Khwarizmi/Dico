@@ -1,20 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
 import prisma from "@/utils/db";
-
-// Fn that checks if searched word is in DB
-const checkDb = async () => {
-  const db = await prisma.word.findMany();
-};
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   console.log("Start of the api in dico.tsx");
-  if (req.method === "GET")
+  if (req.method === "GET") {
     return res.status(403).send({ message: "Only POST resquest are allowed" });
+  }
 
+  // Rest of the API logic
+  console.info({ body: req.body });
   try {
     // Fetching data from DB
     console.log("Fetching data from DB");
