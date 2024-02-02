@@ -14,13 +14,13 @@ export default async function handler(
     }
 
     // Rest of the API infoic
-    console.info({ body: JSON.parse(req.body) });
+    console.info({ body: req.body });
 
     // Fetching data from DB
     console.info("Fetching data from DB");
     const db = await prisma.word.findFirst({
       where: {
-        source: JSON.parse(req.body),
+        source: req.body,
       },
     });
     if (db) {
