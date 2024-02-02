@@ -157,7 +157,7 @@ export default function Home() {
       const res = await fetch(url, options);
       console.log("Response", res.status, res.statusText);
       const data = await res.json();
-
+      console.log({ data });
       if (!res.ok) {
         console.log("Error in fetchDicoEsp first catch");
         setIsError(true);
@@ -173,7 +173,7 @@ export default function Home() {
         return setWord("");
       }
       const { translations, db } = data;
-
+      console.log("Data fetched from DB", db);
       if (db) {
         console.log("Data fetched from DB");
         const parsedTrads = translations.map((trad: string) => {
