@@ -1,8 +1,8 @@
 # Dico 
 
-## 1. What is Dico?
+## 1. What is [Dico](https://dico-uno.vercel.app)?
 
-First of all, you there you have Dico's [repo](https://github.com/All-Khwarizmi/Dico) and [site](https://dico-ochre.vercel.app).
+First of all, you there you have Dico's [repo](https://github.com/All-Khwarizmi/Dico) and [site](https://dico-uno.vercel.app).
 
 Then, as you might have guessed Dico is a simple French-Spanish dictionary. 
 
