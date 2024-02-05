@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/utils/db";
+import { Trad } from "./types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -50,10 +51,7 @@ export default async function handler(
       const data = await response.json();
 
       // Parsing  data
-      type Trad = {
-        source: string;
-        target: string;
-      };
+      
       const translations: Array<Trad> =
         data[0].hits[0].roms[0].arabs[0].translations;
       const source: string = data[0].hits[0].roms[0].headword;

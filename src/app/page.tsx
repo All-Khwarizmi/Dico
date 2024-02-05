@@ -106,6 +106,7 @@ export default function Home() {
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
+        console.log({parsedTrads})
         setTranslations(parsedTrads);
       } else {
         setTranslations(translations);
