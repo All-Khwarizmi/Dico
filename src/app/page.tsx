@@ -1,7 +1,6 @@
 "use client";
 import { Inter } from "@next/font/google";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+import { LocalStorageCache } from "@/utils/localStorage";
 const inter = Inter({ subsets: ["latin"] });
 import parse from "html-react-parser";
 import { useState } from "react";
@@ -27,7 +26,6 @@ export default function Home() {
   const [isTranslations, setIsTranslations] = useState<Boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
 
-  const toast = useToast();
   const submitWord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsError(false);
@@ -37,27 +35,35 @@ export default function Home() {
     if (check > 1) {
       setIsLoading(false);
       console.log(check);
-      toast({
-        title: "Erreur",
-        description: "Un seul mot à la fois.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
+
       window.alert("Un seul mot à la fois.");
       setWord("");
       return;
     } else {
       setIsLoading(true);
 
-      if (isFr)
-        return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
+      // Check if word is in local storage
+      const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
+      if (isWord) {
+        console.log("Word is in local storage");
+        const localTrad = LocalStorageCache.getItem(
+          word.trim().toLocaleLowerCase()
+        );
+
+        console.log("Translations", JSON.parse(JSON.stringify(localTrad!)));
+        setTranslations(localTrad);
+        setIsTranslations(true);
+        setIsLoading(false);
+        return setWord("");
+      } else {
+        if (isFr)
+          return fetchDico(word.trim().toLocaleLowerCase()).catch((err) =>
+            console.log(err)
+          );
+        fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) =>
           console.log(err)
         );
-      fetchDicoEsp(word.trim().toLocaleLowerCase()).catch((err) =>
-        console.log(err)
-      );
+      }
     }
   };
 
@@ -106,10 +112,24 @@ export default function Home() {
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
-        console.log({parsedTrads})
+        console.log({ parsedTrads });
         setTranslations(parsedTrads);
+        // Check if word is in local storage
+        const isWord = LocalStorageCache.hasItem(word);
+        if (!isWord) {
+          console.log("Caching in local storage", word, parsedTrads);
+          LocalStorageCache.setItem(word, parsedTrads);
+        }
+        console.log("Data cached in local storage");
       } else {
         setTranslations(translations);
+        // Check if word is in local storage
+        const isWord = LocalStorageCache.hasItem(word);
+        if (!isWord) {
+          console.log("Caching in local storage", word, translations);
+          LocalStorageCache.setItem(word, translations);
+        }
+        console.log("Data cached in local storage");
       }
 
       setIsTranslations(true);
@@ -164,14 +184,25 @@ export default function Home() {
       const { translations, db } = data;
       console.log("Data fetched from DB", db);
       if (db) {
-        console.log("Data fetched from DB");
         const parsedTrads = translations.map((trad: string) => {
           return JSON.parse(trad);
         });
         setTranslations(parsedTrads);
+        // Check if word is in local storage
+        const isWord = LocalStorageCache.hasItem(word);
+        if (!isWord) {
+          LocalStorageCache.setItem(word, parsedTrads);
+        }
+        console.log("Data cached in local storage");
       } else {
         console.log("Data fetched from API");
         setTranslations(translations);
+        // Check if word is in local storage
+        const isWord = LocalStorageCache.hasItem(word);
+        if (!isWord) {
+          LocalStorageCache.setItem(word, translations);
+        }
+        console.log("Data cached in local storage");
       }
 
       setIsTranslations(true);
