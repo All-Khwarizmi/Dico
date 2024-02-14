@@ -1,11 +1,17 @@
 import { Dispatch, SetStateAction } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
-export function TranslationDirection(
-  isFr: boolean,
-  setIsFR: Dispatch<SetStateAction<boolean>>,
-  isTranslations: boolean
-) {
+export interface TranslationDirectionProps {
+  isFr: boolean;
+  setIsFR: Dispatch<SetStateAction<boolean>>;
+  isTranslations: boolean;
+}
+
+export function TranslationDirection({
+  isFr,
+  setIsFR,
+  isTranslations,
+}: TranslationDirectionProps) {
   return (
     <div className="grid place-items-center  w-full  ">
       {isFr ? (

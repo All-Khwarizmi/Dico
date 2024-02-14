@@ -3,6 +3,18 @@ import { translateFrenchWord } from "./translateFr";
 import { translateSpanishWord } from "./translateSpanish";
 import { Translations } from "./types";
 
+/**
+ * Submits a word for translation.
+ * 
+ * @param e - The form event.
+ * @param setIsError - A function to set the error state.
+ * @param setIsLoading - A function to set the loading state.
+ * @param setWord - A function to set the word state.
+ * @param setIsTranslations - A function to set the translations state.
+ * @param setTranslations - A function to set the translations.
+ * @param word - The word to submit for translation.
+ * @param isFr - A boolean indicating if the word is in French.
+ */
 export const submitWord = (
   e: React.FormEvent<HTMLFormElement>,
   setIsError: React.Dispatch<React.SetStateAction<boolean>>,

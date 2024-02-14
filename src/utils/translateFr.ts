@@ -1,6 +1,16 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./types";
 
+/**
+ * Translates a French word using an API call and updates the state accordingly.
+ * @param word - The word to be translated.
+ * @param setIsLoading - A state setter function to update the loading state.
+ * @param setIsError - A state setter function to update the error state.
+ * @param setTranslations - A state setter function to update the translations state.
+ * @param setWord - A state setter function to update the word state.
+ * @param setIsTranslations - A state setter function to update the translations availability state.
+ * @returns A Promise that resolves when the translation is complete.
+ */
 export const translateFrenchWord = async (
   word: string,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,

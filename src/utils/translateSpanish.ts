@@ -1,6 +1,17 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./types";
 
+/**
+ * Translates a Spanish word using the Dico API.
+ * 
+ * @param word - The word to be translated.
+ * @param setIsLoading - A function to set the loading state.
+ * @param setIsError - A function to set the error state.
+ * @param setTranslations - A function to set the translations state.
+ * @param setWord - A function to set the word state.
+ * @param setIsTranslations - A function to set the translations state.
+ * @returns A Promise that resolves when the translation is complete.
+ */
 export const translateSpanishWord = async (
   word: string,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
