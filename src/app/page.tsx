@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import { MagnifyingGlass } from "react-loader-spinner";
 import { TranslationDirection } from "@/components/TranslationDirection";
 import { Translations } from "@/utils/types";
-import { inputWord, submitWord } from "@/utils/submitWord";
 import Footer from "@/components/Footer";
 import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
