@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
 import { Title } from "@/components/Title";
+import { LoadingGlass } from "@/components/LoadingGlass";
 
 export default function Home() {
   const [word, setWord] = useState<string>("");
@@ -33,20 +34,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-center gap-5">
-        {isLoading ? (
-          <div className="dark:text-green-400 flex flex-col items-center h-full w-full text-black font-bold">
-            <MagnifyingGlass
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="magnifying-glass-loading"
-              wrapperStyle={{}}
-              wrapperClass="magnifying-glass-wrapper"
-              glassColor="#c0efff"
-              color="#7e22ce"
-            />
-          </div>
-        ) : null}
+        {isLoading ? <LoadingGlass /> : null}
 
         <TranslationTable
           translations={translations}
