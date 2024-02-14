@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 export function TranslationDirection(
-  isFr: Boolean,
-  setIsFR: Dispatch<SetStateAction<Boolean>>,
-  isTranslations: Boolean
+  isFr: boolean,
+  setIsFR: Dispatch<SetStateAction<boolean>>,
+  isTranslations: boolean
 ) {
   return (
     <div className="grid place-items-center  w-full  ">
