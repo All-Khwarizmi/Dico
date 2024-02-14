@@ -10,7 +10,7 @@ import { LoadingGlass } from "@/components/LoadingGlass";
 
 export default function Home() {
   const [word, setWord] = useState<string>("");
-  const [isFr, setIsFR] = useState<boolean>(false);
+  const [isFr, setIsFR] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isTranslations, setIsTranslations] = useState<boolean>(false);
