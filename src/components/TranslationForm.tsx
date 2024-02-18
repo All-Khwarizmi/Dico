@@ -42,7 +42,7 @@ export function TranslationForm({
         >
           <input
             required
-            onChange={(event) => inputWord(event, setWord)}
+            onChange={(event) => inputWord(event.target.value, setWord)}
             value={word}
             placeholder="Que veux-tu chercher?"
             className="rounded-lg border border-gray-400  dark:text-white border-1 dark:bg-gray-700 rounded-r-none px-3 py-1"
