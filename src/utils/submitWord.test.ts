@@ -3,7 +3,11 @@ import { inputWord } from "./submitWord";
 describe("inputWord", () => {
   it("should update the word state", () => {
     const setWordMock = jest.fn();
-    const eventMock = "test word";
+    const eventMock = {
+      target: {
+        value: "test word",
+      },
+    };
 
     inputWord(eventMock, setWordMock);
 

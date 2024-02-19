@@ -2,12 +2,9 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-import nextJest from "next/jest.js";
-import type { Config } from "jest";
-const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: "./",
-});
+
+import type {Config} from 'jest';
+
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -37,8 +34,6 @@ const config: Config = {
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
-
-  testEnvironment: "jsdom",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
