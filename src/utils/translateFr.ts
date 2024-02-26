@@ -1,6 +1,6 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./types";
-
+const BASE_URL = "https://dico.jason-suarez.com/";
 /**
  * Translates a French word using an API call and updates the state accordingly.
  * @param word - The word to be translated.
@@ -24,7 +24,7 @@ export const translateFrenchWord = async (
     const url =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/dico"
-        : "https://dico-uno.vercel.app/api/dico";
+        : `${BASE_URL}api/dico`;
     const options: RequestInit = {
       method: "POST",
       headers: {
