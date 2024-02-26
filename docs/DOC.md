@@ -11,18 +11,27 @@
     npm install --save-dev ts-node 
     ```
 
-#### Additional Configuration
+## CI/CD
 
-Here are the additional configurations that I had to do to make the tests work with typescript.
+### Links
+- [Github Actions Tutorial](https://resources.github.com/learn/pathways/automation/essentials/automated-application-deployment-with-github-actions-and-pages/)
+- [Different environments variables](https://www.mohammadfaisal.dev/blog/how-to-handle-different-environments-in-a-nextjs-application)
+- [12 Factor App](https://12factor.net/)
+- [SO - The best way to deploy the different branches](https://stackoverflow.com/questions/77662783/how-to-deploy-nextjs-app-with-ci-cd-jenkins-docker-nginx)
 
-1. I had to install babel to make tests work with typescript. Visit the [Jest Configuration](https://jestjs.io/docs/getting-started#using-typescript) page to get more information about the Jest configuration.
-    - Might be necessary to change the babel configuration to make it work with typescript. Visit the [Babel Configuration](https://babeljs.io/docs/en/babel-preset-typescript) page to get more information about the Babel configuration.
-    - Change babel configuration file name from `babel.config.js` to `babel.config.cjs`  [SO issue](https://stackoverflow.com/questions/61146112/error-while-loading-config-you-appear-to-be-using-a-native-ecmascript-module-c)
-    - Make sure to install the `@babel/preset-typescript` package with the following command: [SO issue](https://stackoverflow.com/questions/56519158/cannot-find-module-babel-preset-env-from-path-did-you-mean-babel-env)
-        ```bash
-        npm install --save-dev @babel/preset-typescript
-        ```
-        and
-        ```bash
-        npm install --save-dev @babel/preset-env
-        ```
+### Configuration
+
+- Visit the [Github Actions Tutorial](https://resources.github.com/learn/pathways/automation/essentials/automated-application-deployment-with-github-actions-and-pages/) page to get now how to configure the CI/CD with Github Actions.
+
+#### Create folder structure 
+**Depending on the nature of your workflow name the files accordingly**
+
+    ```bash
+    mkdir -p .github/workflows
+    ```
+    
+Create the `build-and-test.yml` file inside the `.github/workflows` folder
+
+    ```bash 
+    touch .github/workflows/build-and-test.yml
+    ```

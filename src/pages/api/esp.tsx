@@ -17,13 +17,18 @@ export default async function handler(
     // Rest of the API logic
     console.info({ body: req.body });
 
-    // Fetching data from DB
-    console.info("Fetching data from DB");
-    const db = await prisma.word.findFirst({
-      where: {
-        source: req.body,
-      },
-    });
+    let db = null;
+    try {
+      // Fetching data from DB
+      console.info("Fetching data from DB");
+      db = await prisma.word.findFirst({
+        where: {
+          source: req.body,
+        },
+      });
+    } catch (error) {
+      console.error("An error ocurred trying to fetch from db", error);
+    }
 
     if (db) {
       console.info("Data fetched from DB");
@@ -66,14 +71,18 @@ export default async function handler(
         return JSON.stringify(trad);
       });
 
-      // Cashing to primary postgres DB
-      console.info("Cashing to primary postgres DB");
-      await prisma.word.create({
-        data: {
-          word: translationsString,
-          source: source,
-        },
-      });
+      try {
+        // Cashing to primary postgres DB
+        console.info("Cashing to primary postgres DB");
+        await prisma.word.create({
+          data: {
+            word: translationsString,
+            source: source,
+          },
+        });
+      } catch (error) {
+        console.error("An error ocurred trying to cache the word", error);
+      }
 
       res.status(200).json({ source, translations, db: false });
     }

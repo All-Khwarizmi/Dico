@@ -5,7 +5,7 @@ import { Translations } from "./types";
 
 /**
  * Submits a word for translation.
- * 
+ *
  * @param e - The form event.
  * @param setIsError - A function to set the error state.
  * @param setIsLoading - A function to set the loading state.
@@ -53,17 +53,9 @@ export const submitWord = (
       setIsTranslations(true);
       setIsLoading(false);
       return setWord("");
-    } else {
-      if (isFr)
-        return translateFrenchWord(
-          word.trim().toLocaleLowerCase(),
-          setIsLoading,
-          setIsError,
-          setTranslations,
-          setWord,
-          setIsTranslations
-        ).catch((err) => console.log(err));
-      translateSpanishWord(
+    }
+    if (isFr)
+      return translateFrenchWord(
         word.trim().toLocaleLowerCase(),
         setIsLoading,
         setIsError,
@@ -71,7 +63,14 @@ export const submitWord = (
         setWord,
         setIsTranslations
       ).catch((err) => console.log(err));
-    }
+    translateSpanishWord(
+      word.trim().toLocaleLowerCase(),
+      setIsLoading,
+      setIsError,
+      setTranslations,
+      setWord,
+      setIsTranslations
+    ).catch((err) => console.log(err));
   }
 };
 

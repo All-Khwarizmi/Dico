@@ -16,14 +16,19 @@ export default async function handler(
 
     // Rest of the API infoic
     console.info({ body: req.body });
+    let db = null;
+    try {
+      // Fetching data from DB
+      console.info("Fetching data from DB");
+      db = await prisma.word.findFirst({
+        where: {
+          source: req.body,
+        },
+      });
+    } catch (error) {
+      console.error("An error ocurred trying to fetch from db", error);
+    }
 
-    // Fetching data from DB
-    console.info("Fetching data from DB");
-    const db = await prisma.word.findFirst({
-      where: {
-        source: req.body,
-      },
-    });
     if (db) {
       console.info("Data fetched from DB");
       res
