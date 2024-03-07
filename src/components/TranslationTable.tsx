@@ -15,7 +15,7 @@ export function TranslationTable({
   return (
     <>
       {isTranslations && !isLoading && (
-        <div className=" h-72 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg  overflow-scroll  border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 ">
+        <div className=" h-72 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg   overflow-scroll  border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 ">
           <table className=" h-min relative w-full text-left text-sm text-gray-500 dark:text-gray-400">
             <thead className="sticky top-0 bg-gray-400 dark:bg-gray-900 text-xs uppercase text-gray-700 ">
               <tr className="pb-4 ">
