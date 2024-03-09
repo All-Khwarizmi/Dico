@@ -26,7 +26,7 @@ export const translateWord = async (
     const url =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/translations"
-        : `${BASE_URL}api/translations"`;
+        : `${BASE_URL}api/translations`;
     const options: RequestInit = {
       method: "POST",
       headers: {
