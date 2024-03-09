@@ -30,7 +30,7 @@ export const translateWord = async (
         ? "https://dico-git-dev-jasonsuarez.vercel.app/"
         : process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/translations"
-        : `${process.env.NEXT_PUBLIC_BASE_URL}api/translations`;
+        : `${process.env.NEXT_PUBLIC_BASE_URL}/api/translations`;
     const options: RequestInit = {
       method: "POST",
       headers: {
