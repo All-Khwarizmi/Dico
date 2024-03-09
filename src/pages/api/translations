@@ -1,0 +1,38 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import { payloadSchema } from "../../utils/schemas/payload";
+import prisma from "../../utils/db";
+import { Trad } from "../../utils/types";
+import { Word } from "@prisma/client";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Validate the request method
+  if (req.method !== "POST") {
+    return res.status(403).json({ message: "Only POST resquest are allowed" });
+  }
+
+  // Validate the authorization header
+  if (req.headers.authorization !== process.env.NEXT_PUBLIC_SECRET) {
+    return res.status(403).json({ message: "Not authorized" });
+  }
+
+  // Validate the body
+  const body = payloadSchema.safeParse(req.body);
+  if (!body.success) {
+    return res.status(400).json({ message: "Invalid body" });
+  }
+
+  // Rest of the API infoic
+  console.info({ body: req.body });
+    let db: Word | null = null;
+  try {
+    // Fetching data from DB
+    console.info("Fetching data from DB");
+    db = await prisma.word.findFirst({
+      where: {
+        source: req.body,
+      },
+    });
+  } catch (error) {
+    console.error("An error ocurred trying to fetch from db", error);
+  }
+}
