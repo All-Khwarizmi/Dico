@@ -21,10 +21,6 @@ export const translateWord = async (
   setIsTranslations: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> => {
   try {
-    console.log("Fetching in dico..");
-    const isPreviewEnv = process.env.NEXT_PUBLIC_PREVIEW_ENV != null;
-    const previewEnv = process.env.NEXT_PUBLIC_PREVIEW_ENV ?? "";
-    console.log({ previewEnv, isPreviewEnv });
     const url =
       process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
         ? "https://dico-git-dev-jasonsuarez.vercel.app/"
@@ -35,7 +31,6 @@ export const translateWord = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: process.env.NEXT_PUBLIC_AUTHORIZATION_HEADER ?? "",
       },
       body: JSON.stringify({ word, source }),
     };
@@ -66,7 +61,6 @@ export const translateWord = async (
       const parsedTrads = translations.map((trad: string) => {
         return JSON.parse(trad);
       });
-      console.log({ parsedTrads });
       setTranslations(parsedTrads);
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
@@ -74,16 +68,13 @@ export const translateWord = async (
         console.log("Caching in local storage", word, parsedTrads);
         LocalStorageCache.setItem(word, parsedTrads);
       }
-      console.log("Data cached in local storage");
     } else {
       setTranslations(translations);
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
       if (!isWord) {
-        console.log("Caching in local storage", word, translations);
         LocalStorageCache.setItem(word, translations);
       }
-      console.log("Data cached in local storage");
     }
 
     setIsTranslations(true);
