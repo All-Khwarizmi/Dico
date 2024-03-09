@@ -42,11 +42,11 @@ export const translateWord = async (
     if (!res.ok) {
       setIsError(true);
       window.alert(`
-      L'erreur suivante est survenue: ${res.statusText}
+      L'erreur suivante est survenue: ${res.json().then((text) => text.message)}
       Veuillez réessayer.`);
       console.log({
         message: "Error in fetchDico first catch",
-        response: JSON.stringify(res.text().then((text) => text)),
+        response: JSON.stringify(res.json().then((text) => text.message)),
       });
       setIsTranslations(false);
       setIsLoading(false);
