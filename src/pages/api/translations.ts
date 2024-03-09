@@ -60,8 +60,13 @@ export default async function handler(
       response = await queryPonsApi(bodyData.source, bodyData.word);
       // check res status
       console.info("Response", response.status, response.statusText);
-      if (response.statusText === "No Content" || response.status > 201)
-        return res.status(400).json({ message: "Something went wrong" });
+      if (response.statusText === "No Content" || response.status === 204) {
+        return res.status(404).json({ message: "No content found" });
+
+      } else if (response.status !== 200 || response.statusText !== "OK") {
+        return res.status(500).json({ message: "Something went wrong" });
+      }
+
     } catch (error) {
       console.error("An error ocurred trying to fetch from API", error);
       return res.status(500).json({ message: "Something went wrong" });
