@@ -26,8 +26,8 @@ export const translateWord = async (
   try {
     console.log("Fetching in dico..");
     const url =
-      process.env.PREVIEW_ENV === "true"
-        ? "https://github.com/All-Khwarizmi/Dico/tree/Dev/api/translations"
+      process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
+        ? "https://dico-git-dev-jasonsuarez.vercel.app/"
         : process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/translations"
         : `${BASE_URL}api/translations`;
