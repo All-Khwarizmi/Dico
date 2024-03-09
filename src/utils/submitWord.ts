@@ -1,6 +1,5 @@
 import { LocalStorageCache } from "./localStorage";
-import { translateFrenchWord } from "./translateFr";
-import { translateSpanishWord } from "./translateSpanish";
+import { translateWord } from "./translateWord";
 import { Translations } from "./types";
 
 /**
@@ -54,17 +53,11 @@ export const submitWord = (
       setIsLoading(false);
       return setWord("");
     }
-    if (isFr)
-      return translateFrenchWord(
-        word.trim().toLocaleLowerCase(),
-        setIsLoading,
-        setIsError,
-        setTranslations,
-        setWord,
-        setIsTranslations
-      ).catch((err) => console.log(err));
-    translateSpanishWord(
+
+    const source = isFr ? "fr" : "es";
+    return translateWord(
       word.trim().toLocaleLowerCase(),
+      source,
       setIsLoading,
       setIsError,
       setTranslations,
