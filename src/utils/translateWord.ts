@@ -1,6 +1,6 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./types";
-const BASE_URL = "https://dico.jason-suarez.com/";
+
 /**
  * Translates a French word using an API call and updates the state accordingly.
  * @param word - The word to be translated.
@@ -11,8 +11,9 @@ const BASE_URL = "https://dico.jason-suarez.com/";
  * @param setIsTranslations - A state setter function to update the translations availability state.
  * @returns A Promise that resolves when the translation is complete.
  */
-export const translateFrenchWord = async (
+export const translateWord = async (
   word: string,
+  source: string,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setIsError: React.Dispatch<React.SetStateAction<boolean>>,
   setTranslations: React.Dispatch<React.SetStateAction<Translations>>,
@@ -21,16 +22,22 @@ export const translateFrenchWord = async (
 ): Promise<void> => {
   try {
     console.log("Fetching in dico..");
+    const isPreviewEnv = process.env.NEXT_PUBLIC_PREVIEW_ENV != null;
+    const previewEnv = process.env.NEXT_PUBLIC_PREVIEW_ENV ?? "";
+    console.log({ previewEnv, isPreviewEnv });
     const url =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/dico"
-        : `${BASE_URL}api/dico`;
+      process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
+        ? "https://dico-git-dev-jasonsuarez.vercel.app/"
+        : process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/translations"
+        : `${process.env.NEXT_PUBLIC_BASE_URL}/api/translations`;
     const options: RequestInit = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: process.env.NEXT_PUBLIC_AUTHORIZATION_HEADER ?? "",
       },
-      body: JSON.stringify(word),
+      body: JSON.stringify({ word, source }),
     };
 
     setIsLoading(true);
@@ -44,7 +51,7 @@ export const translateFrenchWord = async (
       Veuillez réessayer.`);
       console.log({
         message: "Error in fetchDico first catch",
-        response: JSON.stringify(res),
+        response: JSON.stringify(res.text().then((text) => text)),
       });
       setIsTranslations(false);
       setIsLoading(false);
