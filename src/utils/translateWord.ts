@@ -26,7 +26,9 @@ export const translateWord = async (
   try {
     console.log("Fetching in dico..");
     const url =
-      process.env.NODE_ENV === "development"
+      process.env.PREVIEW_ENV === "true"
+        ? "https://github.com/All-Khwarizmi/Dico/tree/Dev/api/translations"
+        : process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/translations"
         : `${BASE_URL}api/translations`;
     const options: RequestInit = {
