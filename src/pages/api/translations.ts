@@ -17,7 +17,9 @@ export default async function handler(
   }
 
   // Validate the authorization header
-  if (req.headers.authorization !== process.env.AUTHORIZATION_HEADER) {
+  if (
+    req.headers.authorization !== process.env.NEXT_PUBLIC_AUTHORIZATION_HEADER
+  ) {
     console.info("Invalid authorization header");
     return res.status(403).json({ message: "Not authorized" });
   }
@@ -63,11 +65,9 @@ export default async function handler(
       console.info("Response", response.status, response.statusText);
       if (response.statusText === "No Content" || response.status === 204) {
         return res.status(404).json({ message: "No content found" });
-
       } else if (response.status !== 200 || response.statusText !== "OK") {
         return res.status(500).json({ message: "Something went wrong" });
       }
-
     } catch (error) {
       console.error("An error ocurred trying to fetch from API", error);
       return res.status(500).json({ message: "Something went wrong" });
@@ -99,4 +99,3 @@ export default async function handler(
     res.status(200).json({ source, translations, db: false });
   }
 }
-
