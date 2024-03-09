@@ -1,9 +1,6 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./types";
-import type { Payload } from "./schemas/payload";
-const BASE_URL = "https://dico.jason-suarez.com/";
-const VERCEL_URL = process.env.VERCEL_URL;
-console.log({ VERCEL_URL });
+
 /**
  * Translates a French word using an API call and updates the state accordingly.
  * @param word - The word to be translated.
@@ -25,12 +22,15 @@ export const translateWord = async (
 ): Promise<void> => {
   try {
     console.log("Fetching in dico..");
+    const isPreviewEnv = process.env.NEXT_PUBLIC_PREVIEW_ENV != null;
+    const previewEnv = process.env.NEXT_PUBLIC_PREVIEW_ENV ?? "";
+    console.log({ previewEnv, isPreviewEnv });
     const url =
       process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
         ? "https://dico-git-dev-jasonsuarez.vercel.app/"
         : process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/translations"
-        : `${BASE_URL}api/translations`;
+        : `${process.env.NEXT_PUBLIC_BASE_URL}/api/translations`;
     const options: RequestInit = {
       method: "POST",
       headers: {
