@@ -10,6 +10,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   console.info(`Start of the api translations`);
+
+  // Set options method for CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   // Validate the request method
   if (req.method !== "POST") {
     console.info("Invalid request method");
@@ -21,7 +30,12 @@ export default async function handler(
     req.headers.authorization !== process.env.NEXT_PUBLIC_AUTHORIZATION_HEADER
   ) {
     console.info("Invalid authorization header");
-    return res.status(403).json({ message: "Not authorized" });
+    return res.status(403).json({
+      message: `
+    Invalid authorization header:
+    ${req.headers.authorization ?? "You didn't provide any header"}
+    `,
+    });
   }
 
   // Validate the body
