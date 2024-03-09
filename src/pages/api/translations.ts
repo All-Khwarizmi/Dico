@@ -43,7 +43,12 @@ export default async function handler(
   if (!body.success) {
     console.warn("Invalid body");
     console.info({ error: body.error });
-    return res.status(400).json({ message: "Invalid body" });
+    return res.status(400).json({
+      message: `
+    Invalid body:
+    ${body.error.message}
+    `,
+    });
   }
   const bodyData: Payload = body.data;
 
