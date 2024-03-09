@@ -2,6 +2,8 @@ import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./types";
 import type { Payload } from "./schemas/payload";
 const BASE_URL = "https://dico.jason-suarez.com/";
+const VERCEL_URL = process.env.VERCEL_URL;
+console.log({ VERCEL_URL });
 /**
  * Translates a French word using an API call and updates the state accordingly.
  * @param word - The word to be translated.
