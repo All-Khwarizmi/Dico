@@ -1,6 +1,5 @@
 import { LocalStorageCache } from "./localStorage";
-import { translateWord } from "./translateFr";
-import { translateSpanishWord } from "./translateSpanish";
+import { translateWord } from "./translateWord";
 import { Translations } from "./types";
 
 /**
