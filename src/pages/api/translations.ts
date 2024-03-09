@@ -16,7 +16,7 @@ export default async function handler(
   }
 
   // Validate the authorization header
-  if (req.headers.authorization !== process.env.NEXT_PUBLIC_SECRET) {
+  if (req.headers.authorization !== process.env.AUTHORIZATION_HEADER) {
     console.info("Invalid authorization header");
     return res.status(403).json({ message: "Not authorized" });
   }
@@ -24,7 +24,8 @@ export default async function handler(
   // Validate the body
   const body = payloadSchema.safeParse(req.body);
   if (!body.success) {
-    console.info("Invalid body");
+    console.warn("Invalid body");
+    console.info({ error: body.error });
     return res.status(400).json({ message: "Invalid body" });
   }
   const bodyData: Payload = body.data;
