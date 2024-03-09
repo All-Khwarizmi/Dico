@@ -7,7 +7,6 @@ import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
 import { Title } from "@/components/Title";
 import { LoadingGlass } from "@/components/LoadingGlass";
-
 export default function Home() {
   const [word, setWord] = useState<string>("");
   const [isFr, setIsFR] = useState<boolean>(true);
@@ -15,6 +14,7 @@ export default function Home() {
   const [isError, setIsError] = useState<boolean>(false);
   const [isTranslations, setIsTranslations] = useState<boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
+
 
   return (
     <main
