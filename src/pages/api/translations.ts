@@ -27,9 +27,9 @@ export default async function handler(
     console.info("Invalid body");
     return res.status(400).json({ message: "Invalid body" });
   }
-  const data: Payload = body.data;
+  const bodyData: Payload = body.data;
 
-  // Rest of the API 
+  // Rest of the API
   console.info({ body: req.body });
   let db: Word | null = null;
   try {
@@ -37,7 +37,7 @@ export default async function handler(
     console.info("Fetching data from DB");
     db = await prisma.word.findFirst({
       where: {
-        source: data.word,
+        source: bodyData.word,
       },
     });
   } catch (error) {
@@ -46,17 +46,50 @@ export default async function handler(
 
   if (db) {
     console.info("Data fetched from DB");
-    res
+    return res
       .status(200)
-      .json({ source: data.word, translations: db.word, db: true });
+      .json({ source: bodyData.word, translations: db.word, db: true });
   } else {
     // If not in DB, fetch from API
     console.info("No data in DB");
     console.info("Fetching data from API");
 
+    let response: Response;
     try {
-      const response = await queryPonsApi(data.source, data.word);
-    } catch (error) {}
+      response = await queryPonsApi(bodyData.source, bodyData.word);
+      // check res status
+      console.info("Response", response.status, response.statusText);
+      if (response.statusText === "No Content" || response.status > 201)
+        return res.status(400).json({ message: "Something went wrong" });
+    } catch (error) {
+      console.error("An error ocurred trying to fetch from API", error);
+      return res.status(500).json({ message: "Something went wrong" });
+    }
+
+    const ponsData = await response.json();
+
+    // Parsing  ponsData
+    const translations: Array<Trad> =
+      ponsData[0].hits[0].roms[0].arabs[0].translations;
+    const source: string = ponsData[0].hits[0].roms[0].headword;
+
+    const translationsString = translations.map((trad) => {
+      return JSON.stringify(trad);
+    });
+
+    // "Cashing" ponsData to  primary postgres db
+    try {
+      await prisma.word.create({
+        data: {
+          word: translationsString,
+          source: source,
+        },
+      });
+    } catch (error) {
+      console.info("Second catch", error);
+    }
+
+    res.status(200).json({ source, translations, db: false });
   }
 }
 
@@ -73,7 +106,7 @@ export function urlBuilder(word: string, source: "fr" | "es") {
 
 /**
  * Queries the PONS API to get translations for a given word.
- * 
+ *
  * @param source - The source language of the word (either "fr" for French or "es" for Spanish).
  * @param word - The word to be translated.
  * @returns A Promise that resolves to the response from the PONS API.
