@@ -15,9 +15,9 @@ export default function Home() {
   const [isTranslations, setIsTranslations] = useState<boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
 
-
   return (
     <main
+      id="main"
       className={`h-full w-full  ${
         isTranslations ? "grid content-center" : "grid content-center"
       }`}
