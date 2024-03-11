@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Payload, payloadSchema } from "../../utils/schemas/payload";
 import prisma from "../../utils/db";
-import { Trad } from "../../utils/types";
+import { Trad } from "../../utils/schemas/types";
 import { Word } from "@prisma/client";
 import { queryPonsApi } from "@/utils/queryPonsApi";
 
@@ -12,7 +12,14 @@ export default async function handler(
   console.info(`Start of the api translations`);
 
   // Set options method for CORS
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", [
+    "http://localhost:3000",
+    "https://dico-git-dev-jasonsuarez.vercel.app",
+    "https://dico-git-jasonsuarez.vercel.app",
+    "https://dico.jason-suarez.com",
+
+    "https://dico-git-refactor-api-jasonsuarez.vercel.app/",
+  ]);
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   if (req.method === "OPTIONS") {
@@ -23,19 +30,6 @@ export default async function handler(
   if (req.method !== "POST") {
     console.info("Invalid request method");
     return res.status(403).json({ message: "Only POST resquest are allowed" });
-  }
-
-  // Validate the authorization header
-  if (
-    req.headers.authorization !== process.env.NEXT_PUBLIC_AUTHORIZATION_HEADER
-  ) {
-    console.info("Invalid authorization header");
-    return res.status(403).json({
-      message: `
-    Invalid authorization header:
-    ${req.headers.authorization ?? "You didn't provide any header"}
-    `,
-    });
   }
 
   // Validate the body

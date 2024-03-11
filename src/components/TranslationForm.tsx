@@ -1,5 +1,5 @@
 import { inputWord, submitWord } from "@/utils/submitWord";
-import { Translations } from "@/utils/types";
+import { Translations } from "@/utils/schemas/types";
 import { Dispatch, SetStateAction } from "react";
 
 export interface TranslationFormProps {
