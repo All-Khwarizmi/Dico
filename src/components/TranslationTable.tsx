@@ -1,4 +1,4 @@
-import { Trad, Translations } from "@/utils/types";
+import { Trad, Translations } from "@/utils/schemas/types";
 import parse from "html-react-parser";
 
 export interface TranslationTableProps {
