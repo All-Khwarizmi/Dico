@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
 import { TranslationDirection } from "@/components/TranslationDirection";
-import { Translations } from "@/utils/types";
+import { Translations } from "@/utils/schemas/types";
 import Footer from "@/components/Footer";
 import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
 import { Title } from "@/components/Title";
 import { LoadingGlass } from "@/components/LoadingGlass";
-
 export default function Home() {
   const [word, setWord] = useState<string>("");
   const [isFr, setIsFR] = useState<boolean>(true);
@@ -18,6 +17,7 @@ export default function Home() {
 
   return (
     <main
+      id="main"
       className={`h-full w-full  ${
         isTranslations ? "grid content-center" : "grid content-center"
       }`}

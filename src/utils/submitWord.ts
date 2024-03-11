@@ -1,7 +1,6 @@
 import { LocalStorageCache } from "./localStorage";
-import { translateFrenchWord } from "./translateFr";
-import { translateSpanishWord } from "./translateSpanish";
-import { Translations } from "./types";
+import { translateWord } from "./translateWord";
+import { Translations } from "./schemas/types";
 
 /**
  * Submits a word for translation.
@@ -39,7 +38,9 @@ export const submitWord = (
     return;
   } else {
     setIsLoading(true);
+    setIsError(false);
 
+    //! TODO: extract this logic to a separate function
     // Check if word is in local storage
     const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
     if (isWord) {
@@ -54,17 +55,11 @@ export const submitWord = (
       setIsLoading(false);
       return setWord("");
     }
-    if (isFr)
-      return translateFrenchWord(
-        word.trim().toLocaleLowerCase(),
-        setIsLoading,
-        setIsError,
-        setTranslations,
-        setWord,
-        setIsTranslations
-      ).catch((err) => console.log(err));
-    translateSpanishWord(
+
+    const source = isFr ? "fr" : "es";
+    return translateWord(
       word.trim().toLocaleLowerCase(),
+      source,
       setIsLoading,
       setIsError,
       setTranslations,

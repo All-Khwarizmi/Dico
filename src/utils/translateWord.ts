@@ -1,20 +1,19 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./schemas/types";
-const BASE_URL = "https://dico.jason-suarez.com/";
 
 /**
- * Translates a Spanish word using the Dico API.
- *
+ * Translates a French word using an API call and updates the state accordingly.
  * @param word - The word to be translated.
- * @param setIsLoading - A function to set the loading state.
- * @param setIsError - A function to set the error state.
- * @param setTranslations - A function to set the translations state.
- * @param setWord - A function to set the word state.
- * @param setIsTranslations - A function to set the translations state.
+ * @param setIsLoading - A state setter function to update the loading state.
+ * @param setIsError - A state setter function to update the error state.
+ * @param setTranslations - A state setter function to update the translations state.
+ * @param setWord - A state setter function to update the word state.
+ * @param setIsTranslations - A state setter function to update the translations availability state.
  * @returns A Promise that resolves when the translation is complete.
  */
-export const translateSpanishWord = async (
+export const translateWord = async (
   word: string,
+  source: string,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setIsError: React.Dispatch<React.SetStateAction<boolean>>,
   setTranslations: React.Dispatch<React.SetStateAction<Translations>>,
@@ -22,63 +21,64 @@ export const translateSpanishWord = async (
   setIsTranslations: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> => {
   try {
-    console.log("Fetching in dico ESP..");
-
     const url =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/esp"
-        : `${BASE_URL}api/esp`;
+      process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
+        ? "https://dico-git-dev-jasonsuarez.vercel.app/"
+        : process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/translations"
+        : `${process.env.NEXT_PUBLIC_BASE_URL}/api/translations`;
     const options: RequestInit = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(word),
+      body: JSON.stringify({ word, source }),
     };
 
     setIsLoading(true);
+
     const res = await fetch(url, options);
-    console.log("Response", res.status, res.statusText);
     const data = await res.json();
-    console.log({ data });
+
     if (!res.ok) {
-      console.log("Error in fetchDicoEsp first catch");
       setIsError(true);
+      window.alert(`
+      L'erreur suivante est survenue: ${data.message}
+      Veuillez réessayer.`);
+      console.log({
+        message: "Error in fetching translations. Status not OK.",
+        response: JSON.stringify(data.message),
+      });
+
       setIsTranslations(false);
       setIsLoading(false);
-      console.log({
-        message: "Error in fetchDicoEsp first catch",
-        response: JSON.stringify(res),
-      });
-      window.alert(`
-      L'erreur suivante est survenue: ${res.statusText}
-      Veuillez réessayer.`);
       return setWord("");
     }
+
     const { translations, db } = data;
-    console.log("Data fetched from DB", db);
     if (db) {
       const parsedTrads = translations.map((trad: string) => {
         return JSON.parse(trad);
       });
+
+      //! TODO: return this
       setTranslations(parsedTrads);
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
       if (!isWord) {
+        console.log("Caching in local storage", word, parsedTrads);
         LocalStorageCache.setItem(word, parsedTrads);
       }
-      console.log("Data cached in local storage");
     } else {
-      console.log("Data fetched from API");
+      //! TODO: return this instead
       setTranslations(translations);
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
       if (!isWord) {
         LocalStorageCache.setItem(word, translations);
       }
-      console.log("Data cached in local storage");
     }
-
+    // Return information along with translations to be used in the UI to update the translations, error, loading state
     setIsTranslations(true);
     window.scrollTo(0, 0);
     setWord("");
@@ -86,10 +86,10 @@ export const translateSpanishWord = async (
   } catch (err) {
     setIsLoading(false);
     setIsError(true);
-    console.log({ message: "Error in fetchDicoEsp last catch", err });
+
     window.alert(`
-        L'erreur suivante est survenue: ${err}
-        Veuillez réessayer.`);
-    return setWord("");
+      Une erreur est survenue: ${err}
+      Veuillez réessayer.`);
+    console.log(err);
   }
 };

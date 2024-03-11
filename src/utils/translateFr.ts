@@ -1,5 +1,5 @@
 import { LocalStorageCache } from "./localStorage";
-import { Translations } from "./types";
+import { Translations } from "./schemas/types";
 const BASE_URL = "https://dico.jason-suarez.com/";
 /**
  * Translates a French word using an API call and updates the state accordingly.
