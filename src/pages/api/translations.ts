@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Payload, payloadSchema } from "../../utils/schemas/payload";
 import prisma from "../../utils/db";
-import { Trad } from "../../utils/types";
+import { Trad } from "../../utils/schemas/types";
 import { Word } from "@prisma/client";
 import { queryPonsApi } from "@/utils/queryPonsApi";
 

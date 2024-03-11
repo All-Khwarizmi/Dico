@@ -1,10 +1,10 @@
 import { LocalStorageCache } from "./localStorage";
-import { Translations } from "./types";
+import { Translations } from "./schemas/types";
 const BASE_URL = "https://dico.jason-suarez.com/";
 
 /**
  * Translates a Spanish word using the Dico API.
- * 
+ *
  * @param word - The word to be translated.
  * @param setIsLoading - A function to set the loading state.
  * @param setIsError - A function to set the error state.

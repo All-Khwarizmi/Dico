@@ -1,6 +1,6 @@
 import { LocalStorageCache } from "./localStorage";
 import { translateWord } from "./translateWord";
-import { Translations } from "./types";
+import { Translations } from "./schemas/types";
 
 /**
  * Submits a word for translation.
@@ -38,7 +38,9 @@ export const submitWord = (
     return;
   } else {
     setIsLoading(true);
+    setIsError(false);
 
+    //! TODO: extract this logic to a separate function
     // Check if word is in local storage
     const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
     if (isWord) {
