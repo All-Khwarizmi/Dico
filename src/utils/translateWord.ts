@@ -1,5 +1,5 @@
 import { LocalStorageCache } from "./localStorage";
-import { Translations } from "./types";
+import { Translations } from "./schemas/types";
 
 /**
  * Translates a French word using an API call and updates the state accordingly.
@@ -38,13 +38,13 @@ export const translateWord = async (
     setIsLoading(true);
 
     const res = await fetch(url, options);
+    const data = await res.json();
 
     if (!res.ok) {
       setIsError(true);
       window.alert(`
-      L'erreur suivante est survenue: ${res.json().then((text) => text.message)}
+      L'erreur suivante est survenue: ${data.message}
       Veuillez réessayer.`);
-      const data = await res.json();
       console.log({
         message: "Error in fetching translations. Status not OK.",
         response: JSON.stringify(data.message),
@@ -55,14 +55,13 @@ export const translateWord = async (
       return setWord("");
     }
 
-    const data = await res.json();
-    console.log("Data: ", data);
-
     const { translations, db } = data;
     if (db) {
       const parsedTrads = translations.map((trad: string) => {
         return JSON.parse(trad);
       });
+
+      //! TODO: return this
       setTranslations(parsedTrads);
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
@@ -71,6 +70,7 @@ export const translateWord = async (
         LocalStorageCache.setItem(word, parsedTrads);
       }
     } else {
+      //! TODO: return this instead
       setTranslations(translations);
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
@@ -78,7 +78,7 @@ export const translateWord = async (
         LocalStorageCache.setItem(word, translations);
       }
     }
-
+    // Return information along with translations to be used in the UI to update the translations, error, loading state
     setIsTranslations(true);
     window.scrollTo(0, 0);
     setWord("");
