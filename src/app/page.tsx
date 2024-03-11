@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { TranslationDirection } from "@/components/TranslationDirection";
-import { Translations } from "@/utils/types";
+import { Translations } from "@/utils/schemas/types";
 import Footer from "@/components/Footer";
 import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
