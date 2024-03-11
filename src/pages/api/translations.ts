@@ -17,6 +17,8 @@ export default async function handler(
     "https://dico-git-dev-jasonsuarez.vercel.app",
     "https://dico-git-jasonsuarez.vercel.app",
     "https://dico.jason-suarez.com",
+
+    "https://dico-git-refactor-api-jasonsuarez.vercel.app/",
   ]);
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
