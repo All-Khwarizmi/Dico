@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches: [main, master, dev, REFACTOR-API]
+    branches: [main, master, Dev, REFACTOR-API]
   pull_request:
-    branches: [main, master, dev, REFACTOR-API]
+    branches: [main, master, Dev, REFACTOR-API]
 jobs:
   test:
     timeout-minutes: 60
