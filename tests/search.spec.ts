@@ -17,9 +17,7 @@ test.describe("Page is available", () => {
     await input.fill("casa");
     await submitButton.click();
 
-    await expect(page.getByTestId("maison ,[object Object]")).toBeVisible({
-      timeout: 25000,
-    });
+    await expect(page.getByTestId("maison ,[object Object]")).toBeVisible();
   });
 });
 
