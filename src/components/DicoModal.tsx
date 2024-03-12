@@ -118,13 +118,13 @@ const DicoModal = () => {
                   onChange={(event) => inputWord(event)}
                   value={word}
                   placeholder="Que veux-tu chercher?"
-                  className="rounded-lg rounded-r-none border  border-2 px-3 py-1"
+                  className="rounded-lg rounded-r-none   border-2 px-3 py-1"
                   type="text"
                   name="word"
                   id="word"
                 />
                 <button
-                  className="bg-gray-700px-3 dark:text-whitedark:bg-gray-900 rounded-lg rounded-l-none bg-gray-400 px-3  py-1.5 font-bold font-bold dark:bg-gray-900 dark:text-white"
+                  className="bg-gray-700px-3 dark:text-whitedark:bg-gray-900 rounded-lg rounded-l-none bg-gray-400 px-3  py-1.5  font-bold dark:bg-gray-900 dark:text-white"
                   type="submit"
                 >
                   Chercher
