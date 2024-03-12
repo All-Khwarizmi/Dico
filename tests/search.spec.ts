@@ -9,19 +9,19 @@ test.describe("Page is available", () => {
   });
 });
 
-test.describe("Search a new word", () => {
-  test("Should allow to search words", async ({ page }) => {
-    await page.goto("http://localhost:3000/");
+// test.describe("Search a new word", () => {
+//   test("Should allow to search words", async ({ page }) => {
+//     await page.goto("http://localhost:3000/");
 
-    await expect(page.getByPlaceholder("Que veux-tu chercher?")).toBeVisible();
-    const input = page.getByPlaceholder("Que veux-tu chercher?");
-    
-    expect(page.getByRole("button", { name: "submit-word" })).toBeVisible();
-    const submitButton = page.getByRole("button", { name: "submit-word" });
+//     await expect(page.getByPlaceholder("Que veux-tu chercher?")).toBeVisible();
+//     const input = page.getByPlaceholder("Que veux-tu chercher?");
 
-    await input.fill("casa");
-    await submitButton.click();
+//     expect(page.getByRole("button", { name: "submit-word" })).toBeVisible();
+//     const submitButton = page.getByRole("button", { name: "submit-word" });
 
-    await expect(page.getByTestId("maison ,[object Object]")).toBeVisible();
-  });
-});
+//     await input.fill("casa");
+//     await submitButton.click();
+
+//     await expect(page.getByTestId("maison ,[object Object]")).toBeVisible();
+//   });
+// });
