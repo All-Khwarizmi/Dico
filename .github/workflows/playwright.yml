@@ -4,6 +4,10 @@ on:
     branches: [main, master, Dev, REFACTOR-API]
   pull_request:
     branches: [main, master, Dev, REFACTOR-API]
+
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
   test:
     timeout-minutes: 60
