@@ -41,6 +41,7 @@ export function TranslationForm({
           }
         >
           <input
+            aria-label="Insert word"
             required
             onChange={(event) => inputWord(event, setWord)}
             value={word}
@@ -52,6 +53,7 @@ export function TranslationForm({
             id="word"
           />
           <button
+            aria-label="submit-word"
             className="rounded-lg border shadow-md shadow-gray-500 text-gray-200 border-gray-400 border-1   dark:text-white  text-md font-bold 
             bg-gradient-to-r from-purple-700 to-indigo-700 px-3 py-1 dark:py-1"
             type="submit"
