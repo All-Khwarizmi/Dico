@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "play": "npx playwright test;"
+    "play": "npx playwright test",
+    "show": "npx playwright show-report"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.5.1",
