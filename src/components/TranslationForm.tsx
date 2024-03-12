@@ -55,6 +55,8 @@ export function TranslationForm({
             className="rounded-lg border shadow-md shadow-gray-500 text-gray-200 border-gray-400 border-1   dark:text-white  text-md font-bold 
             bg-gradient-to-r from-purple-700 to-indigo-700 px-3 py-1 dark:py-1"
             type="submit"
+            id="submit-word"
+            name="submit-word"
           >
             Chercher
           </button>
