@@ -59,6 +59,7 @@ export function TranslationForm({
             type="submit"
             id="submit-word"
             name="submit-word"
+          
           >
             Chercher
           </button>
