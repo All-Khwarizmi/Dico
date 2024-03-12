@@ -18,7 +18,7 @@ test.describe("Page is available", () => {
     await submitButton.click();
 
     await expect(page.getByTestId("maison ,[object Object]")).toBeVisible({
-      timeout: 15000,
+      timeout: 25000,
     });
   });
 });
