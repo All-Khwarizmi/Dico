@@ -4,17 +4,8 @@ test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:3000/");
 });
 
-test("get started link", async ({ page }) => {
-  // // Click the get started link.
-  // await page.getByRole('main', { name: 'container' }).click();
-  // // Expects page to have a heading with the name of Installation.
-  // await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
-
 test.describe("Page is available", () => {
   test("has title", async ({ page }) => {
-    await page.goto("http://localhost:3000/");
-
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Dico/);
   });
@@ -25,7 +16,7 @@ test.describe("Search a new word", () => {
     await page.goto("http://localhost:3000/");
 
     const input = page.getByPlaceholder("Que veux-tu chercher?");
-    const submitButton = page.getByRole("button", { name: "Chercher" });
+    const submitButton = page.getByRole("button", { name: "submit-word" });
 
     await input.fill("casa");
     await submitButton.click();
