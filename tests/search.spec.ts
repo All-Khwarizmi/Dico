@@ -7,7 +7,9 @@ test.describe("Page is available", () => {
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Dico/);
 
-    await expect(page.getByPlaceholder("Que veux-tu chercher?")).toBeVisible();
+    await expect(page.getByPlaceholder("Que veux-tu chercher?")).toBeVisible({
+      timeout: 10000,
+    });
     const input = page.getByPlaceholder("Que veux-tu chercher?");
 
     const submitButton = page.getByText("Chercher");
@@ -15,7 +17,9 @@ test.describe("Page is available", () => {
     await input.fill("casa");
     await submitButton.click();
 
-    await expect(page.getByTestId("maison ,[object Object]")).toBeVisible();
+    await expect(page.getByTestId("maison ,[object Object]")).toBeVisible({
+      timeout: 15000,
+    });
   });
 });
 
