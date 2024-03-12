@@ -16,7 +16,7 @@ test.describe("Search a new word", () => {
     await expect(page.getByPlaceholder("Que veux-tu chercher?")).toBeVisible();
     const input = page.getByPlaceholder("Que veux-tu chercher?");
 
-    const submitButton = page.getByText("Button to submit word");
+    const submitButton = page.getByText("Chercher");
 
     await input.fill("casa");
     await submitButton.click();
