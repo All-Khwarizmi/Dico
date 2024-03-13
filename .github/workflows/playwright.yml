@@ -19,8 +19,13 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
+      - name: Run web server
+        run: npm run dev & sleep 5
+      - name: Curl the server
+        run: curl http://localhost:3000 | grep "Dico"
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
