@@ -20,7 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run web server
-        run: npm run dev & sleep 5
+        run: npm run dev & 
+        env:
+          CI: true
       - name: Curl the server
         run: curl http://localhost:3000 | grep "Dico"
       - name: Install Playwright Browsers
