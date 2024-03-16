@@ -1,10 +1,8 @@
 import { inputWord, submitWord } from "@/utils/submitWord";
 import { Translations } from "@/utils/schemas/types";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 export interface TranslationFormProps {
-  word: string;
-  setWord: Dispatch<SetStateAction<string>>;
   isFr: boolean;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
@@ -13,8 +11,6 @@ export interface TranslationFormProps {
   setTranslations: Dispatch<SetStateAction<Translations>>;
 }
 export function TranslationForm({
-  word,
-  setWord,
   isFr,
   isLoading,
   setIsLoading,
@@ -22,6 +18,8 @@ export function TranslationForm({
   setIsTranslations,
   setTranslations,
 }: TranslationFormProps) {
+  const [word, setWord] = useState<string>("");
+
   return (
     <>
       {isLoading ? null : (
@@ -59,7 +57,6 @@ export function TranslationForm({
             type="submit"
             id="submit-word"
             name="submit-word"
-          
           >
             Chercher
           </button>

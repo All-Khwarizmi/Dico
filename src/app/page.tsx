@@ -10,7 +10,6 @@ import { LoadingGlass } from "@/components/LoadingGlass";
 import "./app.css";
 
 export default function App() {
-  const [word, setWord] = useState<string>("");
   const [isFr, setIsFR] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -35,8 +34,7 @@ export default function App() {
             isTranslations={isTranslations}
           />
           <TranslationForm
-            word={word}
-            setWord={setWord}
+           
             isFr={isFr}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
