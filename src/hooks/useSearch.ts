@@ -1,5 +1,6 @@
 import { LocalStorageCache } from "@/utils/localStorage";
 import { Translations } from "@/utils/schemas/types";
+import { translateWord } from "@/utils/translateWord";
 import { useState, useEffect } from "react";
 
 export function useSearchWord() {
@@ -9,6 +10,7 @@ export function useSearchWord() {
   const [translations, setTranslations] = useState<Translations>([]);
   const [word, setWord] = useState<string>("");
   const [search, setSearch] = useState<string>("");
+  const [isFr, setIsFR] = useState<boolean>(true);
 
   useEffect(() => {
     async function wordSearch() {
@@ -17,18 +19,25 @@ export function useSearchWord() {
       // Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
       if (isWord) {
-        console.log("Word is in local storage");
         const localTrad = LocalStorageCache.getItem(
           word.trim().toLocaleLowerCase()
         );
-
-        console.log("Translations", JSON.parse(JSON.stringify(localTrad!)));
         setTranslations(localTrad);
         setIsTranslations(true);
         setIsLoading(false);
         setWord("");
         return;
       }
+      const source = isFr ? "fr" : "es";
+      return translateWord(
+        word.trim().toLocaleLowerCase(),
+        source,
+        setIsLoading,
+        setIsError,
+        setTranslations,
+        setWord,
+        setIsTranslations
+      ).catch((err) => console.log(err));
     }
     if (word !== "") {
       wordSearch();
@@ -44,5 +53,7 @@ export function useSearchWord() {
     word,
     setWord,
     setSearch,
+    isFr,
+    setIsFR,
   };
 }
