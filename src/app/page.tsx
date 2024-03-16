@@ -9,52 +9,8 @@ import "./app.css";
 import { submitWord } from "@/utils/submitWord";
 import { LocalStorageCache } from "@/utils/localStorage";
 import { set } from "zod";
+import { useSearchWord } from "@/hooks/useSearch";
 
-export function useSearchStates() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [isTranslations, setIsTranslations] = useState<boolean>(false);
-  const [translations, setTranslations] = useState<Translations>([]);
-  const [word, setWord] = useState<string>("");
-  const [search, setSearch] = useState<string>("");
-
-  useEffect(() => {
-    async function wordSearch() {
-      setIsLoading(true);
-
-      // Check if word is in local storage
-      const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
-      if (isWord) {
-        console.log("Word is in local storage");
-        const localTrad = LocalStorageCache.getItem(
-          word.trim().toLocaleLowerCase()
-        );
-
-        console.log("Translations", JSON.parse(JSON.stringify(localTrad!)));
-        setTranslations(localTrad);
-        setIsTranslations(true);
-        setIsLoading(false);
-        setWord("");
-        return;
-      }
-    }
-    if (word !== "") {
-      wordSearch();
-    }
-  }, [search]);
-
-
-  return {
-    isLoading,
-    setIsLoading,
-    isError,
-    isTranslations,
-    translations,
-    word,
-    setWord,
-    setSearch,
-  };
-}
 export default function App() {
   const {
     isLoading,
@@ -65,7 +21,7 @@ export default function App() {
     word,
     setWord,
     setSearch,
-  } = useSearchStates();
+  } = useSearchWord();
   const [isFr, setIsFR] = useState<boolean>(true);
 
   const handleInputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
