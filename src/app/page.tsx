@@ -28,7 +28,7 @@ export default function Home() {
         isTranslations={isTranslations}
       />
 
-      <div className="flex flex-col items-center gap-5">
+      <section className="flex flex-col items-center gap-5">
         {isLoading ? <LoadingGlass /> : null}
 
         <TranslationTable
@@ -46,7 +46,7 @@ export default function Home() {
           setIsTranslations={setIsTranslations}
           setTranslations={setTranslations}
         />
-      </div>
+      </section>
       <Footer />
     </main>
   );
