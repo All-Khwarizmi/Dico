@@ -7,6 +7,8 @@ import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
 import { Title } from "@/components/Title";
 import { LoadingGlass } from "@/components/LoadingGlass";
+
+
 export default function Home() {
   const [word, setWord] = useState<string>("");
   const [isFr, setIsFR] = useState<boolean>(true);
@@ -22,16 +24,16 @@ export default function Home() {
         isTranslations ? "grid content-center" : "grid content-center"
       }`}
     >
-      <div className="flex flex-col h-[20%] items-center gap-5">
+      <header className="flex flex-col h-[20%] items-center gap-5">
         <Title />
         <TranslationDirection
           isFr={isFr}
           setIsFR={setIsFR}
           isTranslations={isTranslations}
         />
-      </div>
+      </header>
 
-      <div className="flex flex-col items-center gap-5">
+      <section className="flex flex-col items-center gap-5">
         {isLoading ? <LoadingGlass /> : null}
 
         <TranslationTable
@@ -49,7 +51,7 @@ export default function Home() {
           setIsTranslations={setIsTranslations}
           setTranslations={setTranslations}
         />
-      </div>
+      </section>
       <Footer />
     </main>
   );
