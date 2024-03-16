@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { TranslationDirection } from "@/components/TranslationDirection";
+import { TitleAndDirection } from "@/components/TranslationDirection";
 import { Translations } from "@/utils/schemas/types";
 import Footer from "@/components/Footer";
 import { TranslationTable } from "@/components/TranslationTable";
@@ -22,14 +22,11 @@ export default function Home() {
         isTranslations ? "grid content-center" : "grid content-center"
       }`}
     >
-      <div className="flex flex-col h-[20%] items-center gap-5">
-        <Title />
-        <TranslationDirection
-          isFr={isFr}
-          setIsFR={setIsFR}
-          isTranslations={isTranslations}
-        />
-      </div>
+      <TitleAndDirection
+        isFr={isFr}
+        setIsFR={setIsFR}
+        isTranslations={isTranslations}
+      />
 
       <div className="flex flex-col items-center gap-5">
         {isLoading ? <LoadingGlass /> : null}
