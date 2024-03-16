@@ -7,7 +7,9 @@ import { TranslationTable } from "@/components/TranslationTable";
 import { TranslationForm } from "@/components/TranslationForm";
 import { Title } from "@/components/Title";
 import { LoadingGlass } from "@/components/LoadingGlass";
-export default function Home() {
+import "./app.css";
+
+export default function App() {
   const [word, setWord] = useState<string>("");
   const [isFr, setIsFR] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -16,38 +18,34 @@ export default function Home() {
   const [translations, setTranslations] = useState<Translations>([]);
 
   return (
-    <main
-      id="main"
-      className={`h-full w-full  ${
-        isTranslations ? "grid content-center" : "grid content-center"
-      }`}
-    >
-      <TitleAndDirection
-        isFr={isFr}
-        setIsFR={setIsFR}
-        isTranslations={isTranslations}
-      />
-
-      <section className="flex flex-col items-center gap-5">
-        {isLoading ? <LoadingGlass /> : null}
-
-        <TranslationTable
-          translations={translations}
-          isLoading={isLoading}
+    <>
+      
+        <TitleAndDirection
+          isFr={isFr}
+          setIsFR={setIsFR}
           isTranslations={isTranslations}
         />
-        <TranslationForm
-          word={word}
-          setWord={setWord}
-          isFr={isFr}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          setIsError={setIsError}
-          setIsTranslations={setIsTranslations}
-          setTranslations={setTranslations}
-        />
-      </section>
-      <Footer />
-    </main>
+
+        <section className="flex flex-col items-center gap-5">
+          {isLoading ? <LoadingGlass /> : null}
+
+          <TranslationTable
+            translations={translations}
+            isLoading={isLoading}
+            isTranslations={isTranslations}
+          />
+          <TranslationForm
+            word={word}
+            setWord={setWord}
+            isFr={isFr}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            setIsError={setIsError}
+            setIsTranslations={setIsTranslations}
+            setTranslations={setTranslations}
+          />
+        </section>
+        <Footer />
+    </>
   );
 }
