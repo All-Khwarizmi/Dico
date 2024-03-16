@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { TitleAndDirection } from "@/components/TranslationDirection";
 import { Translations } from "@/utils/schemas/types";
 import Footer from "@/components/Footer";
@@ -7,17 +7,82 @@ import { TranslationTable } from "@/components/TranslationTable";
 import { LoadingGlass } from "@/components/LoadingGlass";
 import "./app.css";
 import { submitWord } from "@/utils/submitWord";
+import { LocalStorageCache } from "@/utils/localStorage";
+import { set } from "zod";
 
-export default function App() {
-  const [isFr, setIsFR] = useState<boolean>(true);
+export function useSearchStates() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isTranslations, setIsTranslations] = useState<boolean>(false);
   const [translations, setTranslations] = useState<Translations>([]);
   const [word, setWord] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    async function wordSearch() {
+      setIsLoading(true);
+
+      // Check if word is in local storage
+      const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
+      if (isWord) {
+        console.log("Word is in local storage");
+        const localTrad = LocalStorageCache.getItem(
+          word.trim().toLocaleLowerCase()
+        );
+
+        console.log("Translations", JSON.parse(JSON.stringify(localTrad!)));
+        setTranslations(localTrad);
+        setIsTranslations(true);
+        setIsLoading(false);
+        setWord("");
+        return;
+      }
+    }
+    if (word !== "") {
+      wordSearch();
+    }
+  }, [search]);
+
+
+  return {
+    isLoading,
+    setIsLoading,
+    isError,
+    isTranslations,
+    translations,
+    word,
+    setWord,
+    setSearch,
+  };
+}
+export default function App() {
+  const {
+    isLoading,
+    setIsLoading,
+    isError,
+    isTranslations,
+    translations,
+    word,
+    setWord,
+    setSearch,
+  } = useSearchStates();
+  const [isFr, setIsFR] = useState<boolean>(true);
+
   const handleInputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
     return setWord(e.target.value);
   };
+  function handleSubmission(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Word validation (only one word at a time)
+    const check = word.trim().split(" ").length;
+    if (check > 1) {
+      setIsLoading(false);
+      window.alert("Un seul mot à la fois.");
+      setWord("");
+      return;
+    }
+    setSearch(word.trim());
+  }
   return (
     <>
       <TitleAndDirection
@@ -37,18 +102,7 @@ export default function App() {
         {isLoading ? null : (
           <form
             className="text-black shadow-md flex flex-col gap-3 sm:flex-row"
-            onSubmit={(e) =>
-              submitWord(
-                e,
-                setIsError,
-                setIsLoading,
-                setWord,
-                setIsTranslations,
-                setTranslations,
-                word,
-                isFr
-              )
-            }
+            onSubmit={(e) => handleSubmission(e)}
           >
             <input
               aria-label="Insert word"
