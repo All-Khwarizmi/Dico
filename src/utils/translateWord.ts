@@ -1,7 +1,7 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./schemas/types";
 import { URLS } from "./consts";
-
+//! TODO: refactor this to use the new UI contract 
 /**
  * Translates a French word using an API call and updates the state accordingly.
  * @param word - The word to be translated.
