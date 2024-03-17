@@ -17,6 +17,7 @@ export function TranslationTable({
       {isTranslations && !isLoading && (
         <section
           data-test="translations"
+          data-testId="translations"
           id="translations"
           className=" h-72 lg:w-[40%] md:w-[50%] w-[90%] rounded-lg   overflow-scroll  border-2 border-solid dark:border-gray-600 dark:bg-gray-700 shadow-md shadow-gray-500 "
         >
