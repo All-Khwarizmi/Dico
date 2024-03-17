@@ -6,12 +6,11 @@ import { LoadingGlass } from "@/components/LoadingGlass";
 import { useSearchWord } from "@/hooks/useSearch";
 import { SearchForm } from "@/components/SearchForm";
 import { ChakraProvider } from "@chakra-ui/react";
+import Toasts from "@/utils/services/toasts";
 
 export default function App() {
   const {
     isLoading,
-    setIsLoading,
-    isError,
     isTranslations,
     translations,
     word,
@@ -29,8 +28,7 @@ export default function App() {
     // Word validation (only one word at a time)
     const check = word.trim().split(" ").length;
     if (check > 1) {
-      setIsLoading(false);
-      window.alert("Un seul mot à la fois.");
+      Toasts.error("❌ Veuillez entrer un seul mot à la fois.");
       setWord("");
       return;
     }

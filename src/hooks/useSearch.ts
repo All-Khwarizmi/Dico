@@ -12,7 +12,7 @@ export function useSearchWord() {
   const [translations, setTranslations] = useState<Translations>([]);
   const [word, setWord] = useState<string>("");
   const [search, setSearch] = useState<string>("");
-  const [isFr, setIsFR] = useState<boolean>(true);
+  const [isFR, setIsFR] = useState<boolean>(true);
 
   const toast = useToast();
 
@@ -33,7 +33,7 @@ export function useSearchWord() {
         return;
       }
       try {
-        const source = isFr ? "fr" : "es";
+        const source = isFR ? "fr" : "es";
         const [error, trads] = await translateWord({ word, source });
         if (error) {
           setIsError(true);
@@ -74,14 +74,12 @@ export function useSearchWord() {
 
   return {
     isLoading,
-    setIsLoading,
-    isError,
     isTranslations,
     translations,
     word,
     setWord,
     setSearch,
-    isFr,
+    isFr: isFR,
     setIsFR,
   };
 }
