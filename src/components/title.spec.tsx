@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Title } from "/Users/jasonsuarez/App/dico-local/src/components/Title";
+import { Title } from "@/components/Title";
 import { render, screen } from "@testing-library/react";
 import React from "react";
 

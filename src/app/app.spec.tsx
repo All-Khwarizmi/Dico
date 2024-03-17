@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import App from "/Users/jasonsuarez/App/dico-local/src/app/page";
+import App from "@/app/page";
 import { render, screen } from "@testing-library/react";
 
 describe("App", () => {
