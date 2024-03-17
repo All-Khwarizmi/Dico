@@ -1,4 +1,5 @@
 "use client";
+import confetti from "canvas-confetti";
 
 export default function Footer() {
   return (
@@ -7,7 +8,12 @@ export default function Footer() {
         © {new Date().getFullYear()} - Dico - Tous droits réservés
       </p>
       <p className="text-xs text-gray-500 dark:text-gray-400">
-        Made with ❤️ by{"  "}
+        Made with{" "}
+        <span className="pointer " onClick={() => confetti()}>
+          ❤️
+        </span>
+        {"  "}
+        by{"  "}
         Jason Suárez
       </p>
       {/* Add an "Ask AI button" here to open a modal with a form to ask the AI a
