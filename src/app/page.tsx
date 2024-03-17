@@ -1,37 +1,49 @@
 "use client";
-import { useState } from "react";
-import { TranslationDirection } from "@/components/TranslationDirection";
-import { Translations } from "@/utils/schemas/types";
+import { TitleAndDirection } from "@/components/TranslationDirection";
 import Footer from "@/components/Footer";
 import { TranslationTable } from "@/components/TranslationTable";
-import { TranslationForm } from "@/components/TranslationForm";
-import { Title } from "@/components/Title";
 import { LoadingGlass } from "@/components/LoadingGlass";
+import { useSearchWord } from "@/hooks/useSearch";
+import { SearchForm } from "@/components/SearchForm";
 
 
-export default function Home() {
-  const [word, setWord] = useState<string>("");
-  const [isFr, setIsFR] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [isTranslations, setIsTranslations] = useState<boolean>(false);
-  const [translations, setTranslations] = useState<Translations>([]);
+export default function App() {
+  const {
+    isLoading,
+    setIsLoading,
+    isError,
+    isTranslations,
+    translations,
+    word,
+    setWord,
+    setSearch,
+    isFr,
+    setIsFR,
+  } = useSearchWord();
 
+  const handleInputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
+    return setWord(e.target.value);
+  };
+  function handleSubmission(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Word validation (only one word at a time)
+    const check = word.trim().split(" ").length;
+    if (check > 1) {
+      setIsLoading(false);
+      window.alert("Un seul mot à la fois.");
+      setWord("");
+      return;
+    }
+    setSearch(word.trim());
+  }
   return (
-    <main
-      id="main"
-      className={`h-full w-full  ${
-        isTranslations ? "grid content-center" : "grid content-center"
-      }`}
-    >
-      <header className="flex flex-col h-[20%] items-center gap-5">
-        <Title />
-        <TranslationDirection
-          isFr={isFr}
-          setIsFR={setIsFR}
-          isTranslations={isTranslations}
-        />
-      </header>
+    <>
+      <TitleAndDirection
+        isFr={isFr}
+        setIsFR={setIsFR}
+        isTranslations={isTranslations}
+      />
+
 
       <section className="flex flex-col items-center gap-5">
         {isLoading ? <LoadingGlass /> : null}
@@ -41,18 +53,14 @@ export default function Home() {
           isLoading={isLoading}
           isTranslations={isTranslations}
         />
-        <TranslationForm
-          word={word}
-          setWord={setWord}
-          isFr={isFr}
+        <SearchForm
           isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          setIsError={setIsError}
-          setIsTranslations={setIsTranslations}
-          setTranslations={setTranslations}
+          handleSubmission={handleSubmission}
+          handleInputWord={handleInputWord}
+          word={word}
         />
       </section>
       <Footer />
-    </main>
+    </>
   );
 }

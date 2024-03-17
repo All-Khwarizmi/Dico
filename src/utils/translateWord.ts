@@ -23,7 +23,7 @@ export const translateWord = async (
   try {
     const url =
       process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
-        ? "https://dico-git-dev-jasonsuarez.vercel.app/"
+        ? "https://dico-git-dev-jasonsuarez.vercel.app/api/translations"
         : process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/translations"
         : `${process.env.NEXT_PUBLIC_BASE_URL}/api/translations`;

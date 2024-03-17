@@ -69,9 +69,4 @@ export const submitWord = (
   }
 };
 
-export const inputWord = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  setWord: React.Dispatch<React.SetStateAction<string>>
-) => {
-  return setWord(e.target.value);
-};
+
