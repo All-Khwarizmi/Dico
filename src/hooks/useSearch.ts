@@ -2,7 +2,8 @@ import { LocalStorageCache } from "@/utils/local-storage";
 import { Translations } from "@/utils/schemas/types";
 import { translateWord } from "@/utils/translate-word";
 import { useState, useEffect } from "react";
-import { useToast } from "@chakra-ui/react";
+import Toasts from "@/utils/services/toasts";
+import { Toast, useToast } from "@chakra-ui/react";
 
 export function useSearchWord() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -12,6 +13,7 @@ export function useSearchWord() {
   const [word, setWord] = useState<string>("");
   const [search, setSearch] = useState<string>("");
   const [isFr, setIsFR] = useState<boolean>(true);
+
   const toast = useToast();
 
   useEffect(() => {
@@ -39,20 +41,10 @@ export function useSearchWord() {
           setIsLoading(false);
           setWord("");
           if (error.statusCode === 404) {
-            toast({
-              title: "Mot introuvable",
-              status: "error",
-              duration: 3000,
-              isClosable: true,
-            });
+            Toasts.error("❌ Mot introuvable dans le dictionnaire.");
             return;
           }
-          toast({
-            title: "Erreur inconnue",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
+          Toasts.unknown();
 
           return;
         }
@@ -71,12 +63,7 @@ export function useSearchWord() {
         setIsError(true);
         setIsTranslations(false);
         setIsLoading(false);
-        toast({
-          title: "Erreur inconnue, veuillez réessayer.",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
+        Toasts.unknown();
         setWord("");
       }
     }
