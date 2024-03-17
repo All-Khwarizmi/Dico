@@ -15,6 +15,7 @@ export function SearchForm({
     <>
       {isLoading ? null : (
         <form
+          data-testid="search-form"
           className="text-black shadow-md flex flex-col gap-3 sm:flex-row"
           onSubmit={(e) => handleSubmission(e)}
         >
