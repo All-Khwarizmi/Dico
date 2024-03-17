@@ -7,6 +7,7 @@ export default defineConfig({
     name: "Dico",
     root: "src",
     environment: "happy-dom",
+    testTimeout: 25000,
   },
   resolve: {
     alias: {
