@@ -1,5 +1,6 @@
 import { LocalStorageCache } from "./localStorage";
 import { Translations } from "./schemas/types";
+import { URLS } from "./consts";
 
 /**
  * Translates a French word using an API call and updates the state accordingly.
@@ -23,10 +24,10 @@ export const translateWord = async (
   try {
     const url =
       process.env.NEXT_PUBLIC_PREVIEW_ENV === "true"
-        ? "https://dico-git-dev-jasonsuarez.vercel.app/api/translations"
+        ? URLS.preview
         : process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/translations"
-        : `${process.env.NEXT_PUBLIC_BASE_URL}/api/translations`;
+        ? URLS.development
+        : URLS.production;
     const options: RequestInit = {
       method: "POST",
       headers: {
