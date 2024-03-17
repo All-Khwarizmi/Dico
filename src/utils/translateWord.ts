@@ -42,6 +42,15 @@ export const translateWord = async (
     const data = await res.json();
 
     if (!res.ok) {
+      if (res.status === 404) {
+        setIsError(true);
+        window.alert(`
+        Le mot suivant n'a pas été trouvé: ${word}
+        Veuillez réessayer.`);
+        setIsTranslations(false);
+        setIsLoading(false);
+        return setWord("");
+      }
       if (res.status >= 400) {
         setIsError(true);
         window.alert(`
