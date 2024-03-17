@@ -42,14 +42,20 @@ export const translateWord = async (
     const data = await res.json();
 
     if (!res.ok) {
+      if (res.status >= 400) {
+        setIsError(true);
+        window.alert(`
+        L'erreur suivante est survenue: ${data.message}
+        Veuillez réessayer.`);
+        setIsTranslations(false);
+        setIsLoading(false);
+        return setWord("");
+      }
+
       setIsError(true);
       window.alert(`
-      L'erreur suivante est survenue: ${data.message}
+      Une erreur inconnue est survenue.
       Veuillez réessayer.`);
-      console.log({
-        message: "Error in fetching translations. Status not OK.",
-        response: JSON.stringify(data.message),
-      });
 
       setIsTranslations(false);
       setIsLoading(false);
@@ -64,22 +70,21 @@ export const translateWord = async (
 
       //! TODO: return this
       setTranslations(parsedTrads);
-      // Check if word is in local storage
+      //~ Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
       if (!isWord) {
-        console.log("Caching in local storage", word, parsedTrads);
         LocalStorageCache.setItem(word, parsedTrads);
       }
     } else {
       //! TODO: return this instead
       setTranslations(translations);
-      // Check if word is in local storage
+      //~ Check if word is in local storage
       const isWord = LocalStorageCache.hasItem(word);
       if (!isWord) {
         LocalStorageCache.setItem(word, translations);
       }
     }
-    // Return information along with translations to be used in the UI to update the translations, error, loading state
+    //! Return information along with translations to be used in the UI to update the translations, error, loading state
     setIsTranslations(true);
     window.scrollTo(0, 0);
     setWord("");
@@ -89,8 +94,7 @@ export const translateWord = async (
     setIsError(true);
 
     window.alert(`
-      Une erreur est survenue: ${err}
-      Veuillez réessayer.`);
-    console.log(err);
+    Une erreur inconnue est survenue.
+    Veuillez réessayer.`);
   }
 };
