@@ -5,7 +5,7 @@ import { TranslationTable } from "@/components/TranslationTable";
 import { LoadingGlass } from "@/components/LoadingGlass";
 import { useSearchWord } from "@/hooks/useSearch";
 import { SearchForm } from "@/components/SearchForm";
-
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function App() {
   const {
@@ -38,28 +38,29 @@ export default function App() {
   }
   return (
     <>
-      <TitleAndDirection
-        isFr={isFr}
-        setIsFR={setIsFR}
-        isTranslations={isTranslations}
-      />
-
-
-      <section className="flex flex-col items-center gap-5">
-        {isLoading ? <LoadingGlass /> : null}
-
-        <TranslationTable
-          translations={translations}
-          isLoading={isLoading}
+      <ChakraProvider>
+        <TitleAndDirection
+          isFr={isFr}
+          setIsFR={setIsFR}
           isTranslations={isTranslations}
         />
-        <SearchForm
-          isLoading={isLoading}
-          handleSubmission={handleSubmission}
-          handleInputWord={handleInputWord}
-          word={word}
-        />
-      </section>
+
+        <section className="flex flex-col items-center gap-5">
+          {isLoading ? <LoadingGlass /> : null}
+
+          <TranslationTable
+            translations={translations}
+            isLoading={isLoading}
+            isTranslations={isTranslations}
+          />
+          <SearchForm
+            isLoading={isLoading}
+            handleSubmission={handleSubmission}
+            handleInputWord={handleInputWord}
+            word={word}
+          />
+        </section>
+      </ChakraProvider>
       <Footer />
     </>
   );

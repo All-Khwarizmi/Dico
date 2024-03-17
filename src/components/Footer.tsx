@@ -1,10 +1,27 @@
 "use client";
 import confetti from "canvas-confetti";
+import { useToast } from "@chakra-ui/react";
 
 export default function Footer() {
+  const toast = useToast();
+
   return (
     <footer className="flex py-10 flex-col items-center gap-5 bottom-0">
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+      <p
+        onClick={() => {
+          console.log("Copied to clipboard");
+          // Copy to clipboard
+
+          toast({
+            title: "Copied to clipboard",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+          navigator.clipboard.writeText("jasonsuarez.com");
+        }}
+        className="text-xs text-gray-500 dark:text-gray-400"
+      >
         © {new Date().getFullYear()} - Dico - Tous droits réservés
       </p>
       <p className="text-xs text-gray-500 dark:text-gray-400">
