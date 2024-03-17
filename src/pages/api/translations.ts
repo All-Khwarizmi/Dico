@@ -10,20 +10,33 @@ export default async function handler(
   res: NextApiResponse
 ) {
   console.info(`Start of the api translations`);
-
-  // Set options method for CORS
-  res.setHeader("Access-Control-Allow-Origin", [
+  // Allowed access control origin
+  const allowedOrigins = [
     "http://localhost:3000",
     "https://dico-git-dev-jasonsuarez.vercel.app",
     "https://dico-git-jasonsuarez.vercel.app",
     "https://dico.jason-suarez.com",
+    "https://dico-git-refactor-api-jasonsuarez.vercel.app",
+  ];
 
-    "https://dico-git-refactor-api-jasonsuarez.vercel.app/",
-  ]);
-  res.setHeader("Access-Control-Allow-Methods", "POST");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+  // Get the origin from the request
+  const url = req.headers.origin;
+  console.info({url});
+
+  if (url) {
+    if (allowedOrigins.includes(url)) {
+      // Set options method for CORS
+
+      res.setHeader("Access-Control-Allow-Origin", url);
+      res.setHeader("Access-Control-Allow-Methods", "POST");
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+      );
+      if (req.method === "OPTIONS") {
+        return res.status(200).end();
+      }
+    }
   }
 
   // Validate the request method

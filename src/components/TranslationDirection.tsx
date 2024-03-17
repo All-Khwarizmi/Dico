@@ -22,7 +22,7 @@ export function TitleAndDirection({
             className={`grid gap-2 grid-cols-3 ${
               isTranslations
                 ? "w-[80%] md:w-[40%]"
-                : "w-[40%] md:w-[30%]   sm:w-[30%] "
+                : "w-[40%] md:w-[20%]   sm:w-[30%] "
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
@@ -38,7 +38,9 @@ export function TitleAndDirection({
         ) : (
           <div
             className={`grid gap-2 grid-cols-3 ${
-              isTranslations ? "w-[80%] md:w-[40%]" : "w-[40%] md:w-[30%] "
+              isTranslations
+                ? "w-[80%] md:w-[40%]"
+                : "w-[40%] md:w-[20%]   sm:w-[30%] "
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
