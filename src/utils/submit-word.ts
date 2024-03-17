@@ -1,5 +1,5 @@
-import { LocalStorageCache } from "./localStorage";
-import { translateWord } from "./translateWord";
+import { LocalStorageCache } from "./local-storage";
+import { translateWord } from "./translate-word";
 import { Translations } from "./schemas/types";
 
 /**
@@ -68,5 +68,3 @@ export const submitWord = (
     ).catch((err) => console.log(err));
   }
 };
-
-

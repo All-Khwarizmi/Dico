@@ -3,7 +3,7 @@ import { Payload, payloadSchema } from "../../utils/schemas/payload";
 import prisma from "../../utils/db";
 import { Trad } from "../../utils/schemas/types";
 import { Word } from "@prisma/client";
-import { queryPonsApi } from "@/utils/queryPonsApi";
+import { queryPonsApi } from "@/utils/query-pons-api";
 import ApiError, { DatabaseError } from "@/utils/errors/errors";
 
 export default async function handler(

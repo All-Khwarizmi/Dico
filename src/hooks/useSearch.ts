@@ -1,6 +1,6 @@
-import { LocalStorageCache } from "@/utils/localStorage";
+import { LocalStorageCache } from "@/utils/local-storage";
 import { Translations } from "@/utils/schemas/types";
-import { translateWord } from "@/utils/translateWord";
+import { translateWord } from "@/utils/translate-word";
 import { useState, useEffect } from "react";
 
 export function useSearchWord() {
