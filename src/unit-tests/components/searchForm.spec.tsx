@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { SearchForm } from "./SearchForm";
+import { SearchForm } from "../../components/SearchForm";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import e from "cors";
