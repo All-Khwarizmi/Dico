@@ -27,12 +27,18 @@ export default class ApiError extends Error {
       400
     );
   }
+  static unknownError(): ApiError {
+    return new ApiError("An unknown error occurred", 520);
+  }
 }
 
 export class ClientError extends Error {
   constructor(public message: string) {
     super(message);
     this.name = this.constructor.name;
+  }
+  static unknownError(): ClientError {
+    return new ClientError("Une erreur inconnue est survenue");
   }
 }
 

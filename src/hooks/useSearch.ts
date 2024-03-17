@@ -28,16 +28,39 @@ export function useSearchWord() {
         setWord("");
         return;
       }
-      const source = isFr ? "fr" : "es";
-      return translateWord(
-        word.trim().toLocaleLowerCase(),
-        source,
-        setIsLoading,
-        setIsError,
-        setTranslations,
-        setWord,
-        setIsTranslations
-      ).catch((err) => console.log(err));
+      try {
+        const source = isFr ? "fr" : "es";
+        const [error, trads] = await translateWord({ word, source });
+        if (error) {
+          setIsError(true);
+          setIsTranslations(false);
+          setIsLoading(false);
+          window.alert(`
+        Une erreur est survenue: ${error.message}
+        Veuillez réessayer.`);
+          setWord("");
+          return;
+        }
+        if (trads) {
+          setTranslations(trads);
+          setIsTranslations(true);
+          setIsLoading(false);
+          //~ Check if word is in local storage
+          const isWord = LocalStorageCache.hasItem(word);
+          if (!isWord) {
+            LocalStorageCache.setItem(word, trads);
+          }
+          setWord("");
+        }
+      } catch (error) {
+        setIsError(true);
+        setIsTranslations(false);
+        setIsLoading(false);
+        window.alert(`
+        Une erreur inconnue est survenue.
+        Veuillez réessayer.`);
+        setWord("");
+      }
     }
     if (word !== "") {
       wordSearch();

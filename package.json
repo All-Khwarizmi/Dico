@@ -12,7 +12,8 @@
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
     "play": "npx playwright test",
-    "show": "npx playwright show-report"
+    "show": "npx playwright show-report",
+    "test:all": "npm run test && npm run play"
   },
   "pre-commit": [
     "lint",
