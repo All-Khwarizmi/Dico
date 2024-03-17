@@ -6,6 +6,7 @@ import { LoadingGlass } from "@/components/LoadingGlass";
 import { useSearchWord } from "@/hooks/useSearch";
 import { SearchForm } from "@/components/SearchForm";
 
+
 export default function App() {
   const {
     isLoading,
@@ -42,6 +43,7 @@ export default function App() {
         setIsFR={setIsFR}
         isTranslations={isTranslations}
       />
+
 
       <section className="flex flex-col items-center gap-5">
         {isLoading ? <LoadingGlass /> : null}
