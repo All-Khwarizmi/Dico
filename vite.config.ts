@@ -8,4 +8,9 @@ export default defineConfig({
     root: "src",
     environment: "happy-dom",
   },
+  resolve: {
+    alias: {
+      "@": new URL("src", import.meta.url).pathname,
+    },
+  },
 });
