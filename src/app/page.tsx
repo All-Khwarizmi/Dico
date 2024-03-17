@@ -7,6 +7,7 @@ import { useSearchWord } from "@/hooks/useSearch";
 import { SearchForm } from "@/components/SearchForm";
 import { ChakraProvider } from "@chakra-ui/react";
 import Toasts from "@/utils/services/toasts";
+import theme from "@/styles/theme";
 
 export default function App() {
   const {
@@ -36,7 +37,7 @@ export default function App() {
   }
   return (
     <>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <TitleAndDirection
           isFr={isFr}
           setIsFR={setIsFR}
