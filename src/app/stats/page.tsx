@@ -1,11 +1,14 @@
 "use client";
-import WordsList from "@/components/WordsList"; // Ajustez le chemin d'importation selon votre structure
+import Header from "@/components/Header";
+import Stats from "@/components/stats/Stats";
 
+import theme from "@/styles/theme";
+import { ChakraProvider } from "@chakra-ui/react";
 export default function HomePage() {
   return (
-    <div>
-      <h1>Popular Words</h1>
-      <WordsList />
-    </div>
+    <ChakraProvider theme={theme} cssVarsRoot="body">
+      <Header />
+      <Stats />
+    </ChakraProvider>
   );
 }
