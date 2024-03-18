@@ -37,7 +37,7 @@ export default function App() {
   }
   return (
     <>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme} cssVarsRoot="body">
         <TitleAndDirection
           isFr={isFr}
           setIsFR={setIsFR}
