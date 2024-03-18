@@ -81,6 +81,17 @@ export default async function handler(
   }
 
   if (db) {
+    // Le mot existe dans la base de données, enregistrez la recherche
+    //~ Save the search statistics
+    await prisma.search.create({
+      data: {
+        wordSource: bodyData.word,
+        searchTime: new Date(),
+        language: bodyData.source,
+        foundInDB: true,
+        wordId: db.id, // Associer à l'ID du mot trouvé
+      },
+    });
     console.info("Data fetched from DB");
     return res
       .status(200)
@@ -133,12 +144,25 @@ export default async function handler(
 
     //~ "Cashing" ponsData to  primary postgres db
     try {
-      await prisma.word.create({
+      const dbWord = await prisma.word.create({
         data: {
           word: translationsString,
           source: source,
         },
       });
+
+      try {
+        //~ Save the search statistics
+        await prisma.search.create({
+          data: {
+            wordSource: bodyData.word,
+            searchTime: new Date(),
+            language: bodyData.source,
+            foundInDB: false,
+            wordId: dbWord.id,
+          },
+        });
+      } catch (error) {}
     } catch (error) {
       const err = DatabaseError.internalServerError();
       console.error("An error ocurred trying to save to db", error);

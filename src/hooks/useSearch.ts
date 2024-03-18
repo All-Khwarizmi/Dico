@@ -15,6 +15,8 @@ export function useSearchWord() {
   const [isFR, setIsFR] = useState<boolean>(true);
 
   const toast = useToast();
+  //! Memoize the toast
+  const toasty = new Toasts(toast);
 
   useEffect(() => {
     async function wordSearch() {
@@ -41,10 +43,10 @@ export function useSearchWord() {
           setIsLoading(false);
           setWord("");
           if (error.statusCode === 404) {
-            Toasts.error("❌ Mot introuvable dans le dictionnaire.");
+           toasty.error("❌ Mot introuvable dans le dictionnaire.");
             return;
           }
-          Toasts.unknown();
+          toasty.unknown();
 
           return;
         }
@@ -63,7 +65,7 @@ export function useSearchWord() {
         setIsError(true);
         setIsTranslations(false);
         setIsLoading(false);
-        Toasts.unknown();
+        toasty.unknown();
         setWord("");
       }
     }
