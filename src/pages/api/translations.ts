@@ -5,38 +5,31 @@ import { Trad } from "../../utils/schemas/types";
 import { Word } from "@prisma/client";
 import { queryPonsApi } from "@/utils/query-pons-api";
 import ApiError, { DatabaseError } from "@/utils/errors/errors";
+import { allowedOriginsService } from "@/utils/services/allowed-origins";
+import { ALLOWED_ORIGINS as allowedOrigins } from "@/utils/services/allowed-origins";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   console.info(`Start of the api translations`);
-  //~ Allowed access control origin
-  const allowedOrigins = [
-    "http://localhost:3000",
-    "https://dico-git-dev-jasonsuarez.vercel.app",
-    "https://dico-git-jasonsuarez.vercel.app",
-    "https://dico.jason-suarez.com",
-    "https://dico-git-refactor-api-jasonsuarez.vercel.app",
-  ];
 
   //~ Get the origin from the request
   const url = req.headers.origin;
   console.info({ url });
+  //~ Check if the origin is allowed
+  const isAllowed = allowedOriginsService({ url, allowedOrigins });
 
-  if (url) {
-    if (allowedOrigins.includes(url)) {
-      // Set options method for CORS
+  if (isAllowed && req.method === "OPTIONS" && url) {
 
-      res.setHeader("Access-Control-Allow-Origin", url);
-      res.setHeader("Access-Control-Allow-Methods", "POST");
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Content-Type, Authorization"
-      );
-      if (req.method === "OPTIONS") {
-        return res.status(200).end();
-      }
+    res.setHeader("Access-Control-Allow-Origin", url);
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+      return res.status(200).end();
     }
   }
 
