@@ -1,0 +1,20 @@
+[
+  {
+    "_count": {
+      "wordId": 42
+    },
+    "wordSource": "maison"
+  },
+  {
+    "_count": {
+      "wordId": 1
+    },
+    "wordSource": "symphonie"
+  },
+  {
+    "_count": {
+      "wordId": 1
+    },
+    "wordSource": "camomille"
+  }
+]

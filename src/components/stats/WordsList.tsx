@@ -3,24 +3,20 @@ import React from "react";
 import { AxisOptions, Chart } from "react-charts";
 
 async function fetchWords() {
-  const response = await fetch("/api/words");
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  return response.json();
+  const response = await import("@/utils/schemas/top-searches.json");
+  return response.default;
 }
 
 interface WordSearches {
-  id: number;
-  word: string;
-  searches: number;
+  _count: { wordId: number };
+  wordSource: string;
 }
 export default function WordsList() {
   const queryClient = useQueryClient();
   const query = useQuery({ queryKey: ["words"], queryFn: fetchWords });
   const primaryAxis = React.useMemo(
     (): AxisOptions<WordSearches> => ({
-      getValue: (word) => word.word,
+      getValue: (word) => word.wordSource,
     }),
     []
   );
@@ -28,7 +24,7 @@ export default function WordsList() {
   const secondaryAxes = React.useMemo(
     (): AxisOptions<WordSearches>[] => [
       {
-        getValue: (word) => word.searches,
+        getValue: (word) => word._count.wordId,
       },
     ],
     []
@@ -36,12 +32,7 @@ export default function WordsList() {
   const data = [
     {
       label: "Words",
-      data: query.data?.map((word: WordSearches) => {
-        return {
-          word: word.word,
-          searches: word.searches,
-        };
-      }),
+      data: query.data || [],
     },
   ];
   if (query.isError) {
