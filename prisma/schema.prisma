@@ -57,8 +57,21 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+
+
 model Word {
-  id     Int    @id @default(autoincrement())
-  source String @unique
-  word   String[]
+  id        Int       @id @default(autoincrement())
+  source    String    @unique
+  word      String[]
+  searches  Search[]
+}
+
+model Search {
+  id          Int      @id @default(autoincrement())
+  wordSource  String   // Le mot recherché
+  searchTime  DateTime @default(now()) // Moment de la recherche
+  language    String   // Langue de la recherche
+  foundInDB   Boolean  // Si la recherche a trouvé le mot dans la base de données
+  Word        Word?    @relation(fields: [wordId], references: [id])
+  wordId      Int?     // L'ID du mot dans `Word` si trouvé
 }

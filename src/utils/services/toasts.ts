@@ -1,36 +1,36 @@
-import { useToast } from "@chakra-ui/react";
+import { CreateToastFnReturn, useToast } from "@chakra-ui/react";
 
 export default class Toasts {
-  static success = (message: string) => {
-    const toast = useToast();
-    toast({
+  private toast: CreateToastFnReturn;
+  constructor(toast: CreateToastFnReturn) {
+    this.toast = toast;
+  }
+  success = (message: string) => {
+    this.toast({
       title: message,
       status: "success",
       duration: 5000,
       isClosable: true,
     });
   };
-  static error = (message: string) => {
-    const toast = useToast();
-    toast({
+  error = (message: string) => {
+    this.toast({
       title: message,
       status: "error",
       duration: 5000,
       isClosable: true,
     });
   };
-  static info = (message: string) => {
-    const toast = useToast();
-    toast({
+  info = (message: string) => {
+    this.toast({
       title: message,
       status: "info",
       duration: 5000,
       isClosable: true,
     });
   };
-  static unknown = () => {
-    const toast = useToast();
-    toast({
+  unknown = () => {
+    this.toast({
       title: "😞 Erreur inconnue, veuillez réessayer.",
       status: "error",
       duration: 5000,
