@@ -13,8 +13,7 @@
     "test:ui": "vitest --ui",
     "play": "npx playwright test",
     "show": "npx playwright show-report",
-    "test:all": "npm run test && npm run play",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "test:all": "npm run test && npm run play"
   },
   "pre-commit": [
     "lint",
