@@ -40,29 +40,30 @@ export default function Main() {
   return (
     <>
       <Header />
-
-      <TitleAndDirection
-        isFr={isFr}
-        setIsFR={setIsFR}
-        isTranslations={isTranslations}
-      />
-
-      <section className="flex flex-col items-center gap-5">
-        {isLoading ? <LoadingGlass /> : null}
-
-        <TranslationTable
-          translations={translations}
-          isLoading={isLoading}
+      <main className="pt-40 md:pt-24 h-full w-full flex flex-col  items-center">
+        <TitleAndDirection
+          isFr={isFr}
+          setIsFR={setIsFR}
           isTranslations={isTranslations}
         />
-        <SearchForm
-          isLoading={isLoading}
-          handleSubmission={handleSubmission}
-          handleInputWord={handleInputWord}
-          word={word}
-        />
-      </section>
-      <Footer />
+
+        <section className="h-full w-full flex flex-col items-center md:justify-center gap-5 ">
+          {isLoading ? <LoadingGlass /> : null}
+
+          <TranslationTable
+            translations={translations}
+            isLoading={isLoading}
+            isTranslations={isTranslations}
+          />
+          <SearchForm
+            isLoading={isLoading}
+            handleSubmission={handleSubmission}
+            handleInputWord={handleInputWord}
+            word={word}
+          />
+        </section>
+        <Footer />
+      </main>
     </>
   );
 }

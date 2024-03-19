@@ -102,9 +102,7 @@ body {
 
 body {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
 }
 
 a {
@@ -131,7 +129,6 @@ body {
 body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
 }
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */

@@ -14,15 +14,15 @@ export function TitleAndDirection({
   isTranslations,
 }: TranslationDirectionProps) {
   return (
-    <section className="flex flex-col h-[20%] items-center gap-5">
-      <Title />
+    <section className="flex flex-col w-full h-full justify-end md:justify-center items-center gap-5 ">
+      <Title title="Dico" />
       <div className="grid place-items-center  w-full  ">
         {isFr ? (
           <div
             className={`grid gap-2 grid-cols-3 ${
               isTranslations
                 ? "w-[80%] md:w-[30%]"
-                : "w-[40%] md:w-[20%]   sm:w-[30%] "
+                : "w-[60%] md:w-[20%]   sm:w-[30%] "
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>
@@ -40,7 +40,7 @@ export function TitleAndDirection({
             className={`grid gap-2 grid-cols-3 ${
               isTranslations
                 ? "w-[80%] md:w-[30%]"
-                : "w-[40%] md:w-[20%]   sm:w-[30%] "
+                : "w-[60%] md:w-[20%]   sm:w-[30%] "
             }  place-items-center  `}
           >
             <button onClick={() => setIsFR(!isFr)}>

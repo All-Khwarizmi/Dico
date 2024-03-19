@@ -1,10 +1,18 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { AxisOptions, Chart } from "react-charts";
+import { LoadingGlass } from "../LoadingGlass";
 
+// async function fetchWords() {
+//   const response = await import("@/utils/schemas/top-searches.json");
+//   return response.default;
+// }
 async function fetchWords() {
-  const response = await import("@/utils/schemas/top-searches.json");
-  return response.default;
+  const response = await fetch("/api/stats");
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return response.json();
 }
 
 interface WordSearches {
@@ -39,7 +47,7 @@ export default function WordsList() {
     return <div>Failed to load data</div>;
   }
   if (query.isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingGlass />;
   }
   return (
     <article className="w-full h-full">
