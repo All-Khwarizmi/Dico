@@ -47,7 +47,7 @@ export default function Main() {
           isTranslations={isTranslations}
         />
 
-        <section className="h-full w-full flex flex-col items-center md:justify-center gap-5 ">
+        <section className="h-full w-full flex flex-col items-center justify-start gap-5 ">
           {isLoading ? <LoadingGlass /> : null}
 
           <TranslationTable
