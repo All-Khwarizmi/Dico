@@ -15,7 +15,7 @@ export function TitleAndDirection({
 }: TranslationDirectionProps) {
   return (
     <section className="flex flex-col h-[20%] items-center gap-5">
-      <Title />
+      <Title title="Dico" />
       <div className="grid place-items-center  w-full  ">
         {isFr ? (
           <div

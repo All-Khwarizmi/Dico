@@ -5,7 +5,7 @@ import React from "react";
 
 describe("Title", () => {
   it("should work", () => {
-    render(<Title />);
+    render(<Title title="Dico" />);
     const title = screen.getByText("Dico");
     expect(title).toBeDefined();
   });
