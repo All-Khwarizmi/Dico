@@ -1,4 +1,4 @@
-export function Title() {
+export function Title({ title }: { title: string }) {
   return (
     <h1
       className="text-6xl font-bold dark:text-purple-700 text-black"
@@ -8,7 +8,7 @@ export function Title() {
         WebkitTextFillColor: "transparent",
       }}
     >
-      Dico
+      {title}
     </h1>
   );
 }
