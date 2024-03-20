@@ -35,7 +35,7 @@ export default function Main() {
       setWord("");
       return;
     }
-    setSearch(word.trim());
+    setSearch(word.trim().toLowerCase());
   }
   return (
     <>
