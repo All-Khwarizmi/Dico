@@ -24,7 +24,8 @@ export default function Main() {
   //! Memoize the toast
   const toasty = new Toasts(toast);
   const handleInputWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-    return setWord(e.target.value);
+    const wordFormatted = e.target.value.trim().toLowerCase();
+    return setWord(wordFormatted);
   };
   function handleSubmission(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,7 +36,7 @@ export default function Main() {
       setWord("");
       return;
     }
-    setSearch(word.trim().toLowerCase());
+    setSearch(word);
   }
   return (
     <>
