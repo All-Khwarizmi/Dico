@@ -23,11 +23,9 @@ export function useSearchWord() {
       setIsLoading(true);
 
       // Check if word is in local storage
-      const isWord = LocalStorageCache.hasItem(word.trim().toLocaleLowerCase());
+      const isWord = LocalStorageCache.hasItem(word);
       if (isWord) {
-        const localTrad = LocalStorageCache.getItem(
-          word.trim().toLocaleLowerCase()
-        );
+        const localTrad = LocalStorageCache.getItem(word);
         setTranslations(localTrad);
         setIsTranslations(true);
         setIsLoading(false);
@@ -43,7 +41,7 @@ export function useSearchWord() {
           setIsLoading(false);
           setWord("");
           if (error.statusCode === 404) {
-           toasty.error("❌ Mot introuvable dans le dictionnaire.");
+            toasty.error("❌ Mot introuvable dans le dictionnaire.");
             return;
           }
           toasty.unknown();
